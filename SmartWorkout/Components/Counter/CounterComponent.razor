@@ -1,0 +1,16 @@
+﻿<p role="status">Current count: @currentCount</p>
+
+<Button Color="Color.Dark" @onclick="IncrementCount">Click Me Blazorise</Button>
+
+
+<Button Color="Color.Primary" Clicked="@ShowLoading" Loading="@isLoading">
+	<LoadingTemplate>
+		Text
+		<div class="spinner-border" style="width:20px; height:20px" role="status">
+			<span class="sr-only">Loading...</span>
+		</div>
+	</LoadingTemplate>
+	<ChildContent>
+		Click to load
+	</ChildContent>
+</Button>

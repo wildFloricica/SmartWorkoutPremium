@@ -1,0 +1,25 @@
+﻿@page "/workouts/add/{UserId:int}"
+@rendermode InteractiveServer
+<h3>Add workout for @User.FirstName @User.LastName</h3>
+
+<EditForm Model="@Workout" OnSubmit="@SaveCurrentWorkout" FormName="Add_Workout">
+	<div class="form-group">
+		<label>Name :</label>
+		<div>
+			<InputText @bind-Value="Workout.Name" class="form-control col-sm-3" />
+			<ValidationMessage For="@(() => Workout.Name)" />
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label> Date :</label>
+		<div>
+			<InputDate @bind-Value="Workout.Date" class="form-control col-sm-3" />
+			<ValidationMessage For="@(() => Workout.Date)" />
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<button type="submit" class="btn btn-primary">Save</button>
+	</div>
+</EditForm>

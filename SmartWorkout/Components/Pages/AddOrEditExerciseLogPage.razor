@@ -1,0 +1,98 @@
+﻿@page "/exercise-logs/add/{WorkoutId:int}"
+@using SmartWorkout.Entities
+@rendermode InteractiveServer
+
+
+
+<Accordion>
+	<AccordionItem @bind-Visible="@_accordionItem2Visible">
+		<AccordionHeader>
+			<Heading Size="HeadingSize.Is5">
+				<AccordionToggle Width="Width.Is100" TextAlignment="TextAlignment.Start">
+					<h3>Add Exercise Log</h3></AccordionToggle>
+			</Heading>
+		</AccordionHeader>
+		<AccordionBody>
+			<EditForm Model="@ExerciseLog" OnSubmit="@SaveCurrentExerciseLog" FormName="Add_ExerciseLog">
+				<DataAnnotationsValidator></DataAnnotationsValidator>
+				<div class="form-group">
+					<label>Reps :</label>
+					<div>
+						<InputNumber @bind-Value="ExerciseLog.Reps" class="form-control col-sm-3"/>
+						<ValidationMessage For="@(() => ExerciseLog.Reps)"/>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label> Duration :</label>
+					<div>
+						<InputNumber @bind-Value="ExerciseLog.Duration" class="form-control col-sm-3"/>
+						<ValidationMessage For="@(() => ExerciseLog.Duration)"/>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label>Exercise:</label>
+					<div>
+						<InputSelect @bind-Value="ExerciseLog.ExerciseId">
+							@foreach (var exercise in Exercises)
+							{
+								<option value="@exercise.Id">@exercise.Description</option>
+							}
+						</InputSelect>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary">Save</button>
+				</div>
+			</EditForm>
+		</AccordionBody>
+	</AccordionItem>
+	<AccordionItem @bind-Visible="@_accordionItem1Visible">
+		<AccordionHeader>
+			<Heading Size="HeadingSize.Is5">
+				<AccordionToggle Width="Width.Is100" TextAlignment="TextAlignment.Start"><h3>View Exercise Logs List</h3></AccordionToggle>
+			</Heading>
+		</AccordionHeader>
+		<AccordionBody>
+			<DataGrid TItem="ExerciseLog"
+			          Data = "@ExerciseLogs"
+			          Filterable
+			          Responsive
+			          Editable
+			          FilterMode="DataGridFilterMode.Menu">
+				<DataGridColumn TItem="ExerciseLog" Field="Exercise.Description" Caption="Exercise"></DataGridColumn>
+				<DataGridColumn TItem="ExerciseLog" Field="Workout.Name" Caption="Workout"></DataGridColumn>
+				<DataGridColumn TItem="ExerciseLog" Field="Workout.User.FirstName" Caption="User">
+					<DisplayTemplate>
+						@{
+							var user = (context as ExerciseLog)?.Workout.User;
+
+							if (user != null)
+							{
+								@($"{user.FirstName} {user.LastName}")
+							}
+						}
+					</DisplayTemplate>
+				</DataGridColumn>
+				<DataGridColumn TItem="ExerciseLog" Field="Reps" Caption="Reps"></DataGridColumn>
+				<DataGridColumn TItem="ExerciseLog" Field="Duration" Caption="Duration"></DataGridColumn>
+
+				<DataGridCommandColumn TItem="ExerciseLog" DeleteCommandAllowed="false" NewCommandAllowed="false">
+					<EditCommandTemplate>
+						<Button Color="Color.Dark" Clicked="() => EditExerciseLog(context)">Edit</Button>
+						<Button Color="Color.Danger" Clicked="() => OnDeleteButtonClicked(context)">Delete</Button>
+					</EditCommandTemplate>
+				</DataGridCommandColumn>
+
+			</DataGrid>
+
+
+		</AccordionBody>
+	</AccordionItem>
+
+</Accordion>
+
+<DeleteConfirmationDialog @ref="DeleteConfirmation" OnConfirm="HandleDeleteConfirmed"></DeleteConfirmationDialog>
+

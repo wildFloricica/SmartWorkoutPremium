@@ -1,0 +1,27 @@
+﻿@using SmartWorkout.Entities
+@page "/exercise-logs"
+@rendermode InteractiveServer
+<h3>Exercise Logs</h3>
+<DataGrid TItem="ExerciseLog"
+          Data = "@ExerciseLogs"
+          Filterable
+          Responsive
+          FilterMode="DataGridFilterMode.Menu">
+	<DataGridColumn TItem="ExerciseLog" Field="Exercise.Description" Caption="Exercise"></DataGridColumn>
+	<DataGridColumn TItem="ExerciseLog" Field="Workout.Name" Caption="Workout"></DataGridColumn>
+	<DataGridColumn TItem="ExerciseLog" Field="Workout.User.FirstName" Caption="User">
+	<DisplayTemplate>
+		@{
+			var user = (context as ExerciseLog)?.Workout.User;
+
+			if (user != null)
+			{
+				@($"{user.FirstName} {user.LastName}")
+			}
+		}
+	</DisplayTemplate>
+	</DataGridColumn>
+	<DataGridColumn TItem="ExerciseLog" Field="Reps" Caption="Reps"></DataGridColumn>
+	<DataGridColumn TItem="ExerciseLog" Field="Duration" Caption="Duration"></DataGridColumn>
+
+</DataGrid>

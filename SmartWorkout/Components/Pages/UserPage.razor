@@ -1,0 +1,33 @@
+﻿@using SmartWorkout.Entities
+@page "/users"
+@rendermode InteractiveServer
+<h3 >Users</h3>
+
+
+<DataGrid TItem="User"
+		  Data="@Users"
+		  Filterable
+		  FilterMode="DataGridFilterMode.Menu"
+		  Responsive
+		  Editable>
+	<DataGridColumn TItem="User" Field="FirstName" Caption="First Name"></DataGridColumn>
+	<DataGridColumn TItem="User" Field="LastName" Caption="Last Name"></DataGridColumn>
+	<DataGridColumn TItem="User" Field="Birthday" DisplayFormat="{0:MM/dd/yyyy}" Caption="Birthday"></DataGridColumn>
+	<DataGridColumn TItem="User" Field="Gender" Caption="Gender" Editable></DataGridColumn>
+	<DataGridCommandColumn TItem="User" DeleteCommandAllowed="false" NewCommandAllowed="true">
+		<NewCommandTemplate>
+			<Button Color="Color.Primary" Clicked="() => AddUser()">
+				<Icon Name="IconName.Add"></Icon>
+				Add new user
+			</Button> 
+		</NewCommandTemplate>
+		<EditCommandTemplate>
+			<Button Color="Color.Dark" Clicked="() => EditUser(context)">Edit</Button>
+			<Button Color="Color.Danger" Clicked="() => OnDeleteButtonClicked(context)">Delete</Button>
+			<Button Color="Color.Primary" Clicked="() => AddWorkout(context)">Add workout</Button>
+		</EditCommandTemplate>
+	</DataGridCommandColumn>
+</DataGrid>
+
+<DeleteConfirmationDialog @ref="DeleteConfirmation" OnConfirm="HandleDeleteConfirmed" />
+

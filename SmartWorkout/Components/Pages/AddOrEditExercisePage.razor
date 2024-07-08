@@ -1,0 +1,27 @@
+﻿@page "/exercises/add"
+@page "/exercises/edit/{ExerciseId:int}"
+@rendermode InteractiveServer
+<h3>Add Exercises</h3>
+
+<EditForm Model="@Exercise" OnSubmit="@SaveCurrentExercise" FormName="AddExercise">
+	<div class="form-group">
+
+		<label>Description :</label>
+		<div>
+			<InputText @bind-Value="Exercise.Description" class="form-control col-sm-3"/>
+			<ValidationMessage For="@(() => Exercise.Description)"/>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label> Type :</label>
+		<div>
+			<InputText @bind-Value="Exercise.Type" class="form-control col-sm-3" />
+			<ValidationMessage For="@(() => Exercise.Type)" />
+		</div>
+	</div>
+
+	<div class="form-group">
+		<button type="submit" class="btn btn-primary">Save</button>
+	</div>
+</EditForm>

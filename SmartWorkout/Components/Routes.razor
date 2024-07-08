@@ -1,6 +1,36 @@
-﻿<Router AppAssembly="typeof(Program).Assembly">
-    <Found Context="routeData">
-        <RouteView RouteData="routeData" DefaultLayout="typeof(Layout.MainLayout)" />
-        <FocusOnNavigate RouteData="routeData" Selector="h1" />
-    </Found>
+﻿<Blazorise.ThemeProvider Theme="@_theme">
+<Router AppAssembly="typeof(Program).Assembly">
+	<Found Context="routeData">
+		<RouteView RouteData="routeData" DefaultLayout="typeof(Layout.MainLayout)" />
+		<FocusOnNavigate RouteData="routeData" Selector="h1" />
+	</Found>
 </Router>
+</Blazorise.ThemeProvider>
+@code{
+
+	private Theme _theme = new Theme
+	{
+		ColorOptions = new ThemeColorOptions()
+		{
+				Primary = "#cfff00",
+				Secondary = "#161616",
+				
+		},
+		BackgroundOptions = new ThemeBackgroundOptions()
+		{
+				Primary = "#161616",
+				Body = "#161616",
+				Danger = "#161616",
+				Dark = "#161616",
+				Info = "#161616",
+				Light = "#161616",
+				Muted = "#161616",
+				Secondary = "#161616",
+				Success = "#161616",
+				Warning = "#161616"
+		},
+		IsRounded = true,
+		IsGradient = false
+	};
+
+}

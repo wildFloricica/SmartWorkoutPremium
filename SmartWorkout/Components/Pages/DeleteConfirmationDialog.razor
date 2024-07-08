@@ -1,0 +1,13 @@
+﻿<Modal  @bind-Visible="IsVisible" @ref="modal">
+	<ModalContent Background="Background.White" Size="ModalSize.Default" Centered>
+		<ModalHeader>
+			<ModalTitle>Are you sure you want to delete this item?</ModalTitle>
+			<CloseButton></CloseButton>
+		</ModalHeader>
+		<ModalFooter Style="align-content:center;justify-content:center">
+				<Button Color="Color.Danger" @onclick="ConfirmDelete">Yes</Button>
+				<Button Color="Color.Dark" @onclick="CloseModal">No</Button>
+		</ModalFooter>
+	</ModalContent>
+
+</Modal>

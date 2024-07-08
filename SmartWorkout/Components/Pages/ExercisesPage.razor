@@ -1,0 +1,27 @@
+﻿@page "/exercises"
+@using SmartWorkout.Entities
+@rendermode InteractiveServer
+<h3>Exercises</h3>
+<DataGrid TItem="Exercise"
+		  Data="@Exercises"
+		  Filterable
+		  Responsive
+		  Editable
+		  FilterMode="DataGridFilterMode.Menu">
+	<DataGridColumn TItem="Exercise" Field="Description" Caption="Description"></DataGridColumn>
+	<DataGridColumn TItem="Exercise" Field="Type" Caption="Type"></DataGridColumn>
+	<DataGridCommandColumn TItem="Exercise" DeleteCommandAllowed="false" HeaderGroupCaption="Actions">
+		<NewCommandTemplate>
+			<Button Color="Color.Primary" Clicked="() => AddExercise()">
+				<Icon Name="IconName.Add"></Icon>
+				Add new exercise
+			</Button>
+		</NewCommandTemplate>
+		<EditCommandTemplate>
+			<Button Color="Color.Dark" Clicked="(() => EditExercise(context))">Edit</Button>
+			<Button Color="Color.Danger" Clicked="(() => OnDeleteButtonClicked(context))">Delete</Button>
+		</EditCommandTemplate>
+	</DataGridCommandColumn>
+</DataGrid>
+
+<DeleteConfirmationDialog @ref=DeleteConfirmation OnConfirm="HandleDeleteConfirmed"></DeleteConfirmationDialog>

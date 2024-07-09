@@ -16,7 +16,7 @@ namespace SmartWorkout.Components.Services.Implementations
 		    _userRepository = userRepository;
 	    }
 
-        public static UserDTO CurrentUser { get;set;}
+        public static UserDTO? CurrentUser { get;set;}
   
 
         public void Login(LoginDTO loginDto)
@@ -55,6 +55,11 @@ namespace SmartWorkout.Components.Services.Implementations
 	        }
 
 	        return true;
+        }
+
+        public void LogOut()
+        {
+	        CurrentUser = null;
         }
     }
 }

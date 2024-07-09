@@ -1,25 +1,46 @@
 ﻿@page "/workouts/add/{UserId:int}"
 @rendermode InteractiveServer
-<h3>Add workout for @User.FirstName @User.LastName</h3>
+<Div Margin="Margin.IsAuto.OnX" style="background:url(background.jpg);background-size:cover;opacity:90%;height:90vh">
 
-<EditForm Model="@Workout" OnSubmit="@SaveCurrentWorkout" FormName="Add_Workout">
-	<div class="form-group">
-		<label>Name :</label>
-		<div>
-			<InputText @bind-Value="Workout.Name" class="form-control col-sm-3" />
-			<ValidationMessage For="@(() => Workout.Name)" />
-		</div>
-	</div>
+	<EditForm Model="Workout" OnValidSubmit="@SaveCurrentWorkout">
+		<DataAnnotationsValidator />
+		<Div Padding="Padding.Is3" Margin="Margin.IsAuto.OnX" Style="width:33%">
 
-	<div class="form-group">
-		<label> Date :</label>
-		<div>
-			<InputDate @bind-Value="Workout.Date" class="form-control col-sm-3" />
-			<ValidationMessage For="@(() => Workout.Date)" />
-		</div>
-	</div>
-	
-	<div class="form-group">
-		<button type="submit" class="btn btn-primary">Save</button>
-	</div>
-</EditForm>
+			<Card Margin="Margin.Is5.FromTop" Shadow="Shadow.Default">
+				<CardBody>
+					<Heading Size="HeadingSize.Is2" Margin="Margin.Is3.FromBottom.Is3.FromTop" TextAlignment="TextAlignment.Center">
+						Create new Workout for @User.FirstName @User.LastName
+					</Heading>
+
+					<Field>
+						<FieldLabel>
+							Workout Name
+						</FieldLabel>
+						<FieldBody>
+							<TextEdit Placeholder="e.g. Legs - Saturday" @bind-Text="Workout.Name" />
+							<ValidationMessage For="@(() => Workout.Name)" />
+						</FieldBody>
+					</Field>
+
+					<Field>
+						<FieldLabel>
+							Date
+						</FieldLabel>
+						<FieldBody>
+							<DateEdit @bind-Date="Workout.Date" />
+							<ValidationMessage For="@(() => Workout.Date)" />
+						</FieldBody>
+					</Field>
+
+					<Field>
+						<Button Type="ButtonType.Submit" Color="Color.Primary" Block>
+							Create Workout
+						</Button>
+					</Field>
+
+
+				</CardBody>
+			</Card>
+		</Div>
+	</EditForm>
+</Div>

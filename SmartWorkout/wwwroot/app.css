@@ -1,5 +1,5 @@
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: Roboto
 }
 
 a, .btn-link {
@@ -49,3 +49,30 @@ h1:focus {
 .darker-border-checkbox.form-check-input {
     border-color: #929292;
 }
+
+.nav-link:focus {
+    background-color: #F27405 !important;
+    color: white !important;
+}
+
+.nav-link:focus span{
+    color:white !important;
+}
+.nav-link:hover {
+    background-color: #f7ac69 !important;
+    cursor:pointer !important;
+}
+
+.nav-item:hover{
+    cursor:pointer !important;
+}
+
+.card-header:hover {
+    background-color: #f7ac69 !important;
+}
+
+.card-headers:active {
+    background-color: #F27405 !important;
+    color: white !important;
+}
+

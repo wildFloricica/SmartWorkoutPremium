@@ -8,6 +8,8 @@ namespace SmartWorkout.Components.Layout
 	{
 		[Inject]
 		public IAuthorizationService AuthorizationService { get; set; }
+		[Inject]
+		public NavigationManager NavigationManager { get; set; }
 		private UserDTO? User { get; set; }
 
 		bool IsLoggedIn { get; set; } = false;
@@ -23,6 +25,12 @@ namespace SmartWorkout.Components.Layout
 				}
 			}
 		
+		}
+
+		public void LogOut()
+		{
+			AuthorizationService.LogOut();
+			NavigationManager.NavigateTo("/",true);
 		}
 	}
 }

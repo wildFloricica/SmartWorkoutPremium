@@ -1,0 +1,71 @@
+﻿@page "/stopwatch/{ExerciseLogId:int}"
+
+@using System.Timers
+@using Blazorise.Extensions
+<Div Margin="Margin.IsAuto.OnX" style="background:url(background.jpg);background-size:cover;opacity:90%;height:90vh">
+
+
+
+	<Alert Color="Color.Primary" Visible="@(!ErrorMessage.IsNullOrEmpty())">
+		<AlertMessage>You are done!</AlertMessage>
+		<CloseButton />
+		<AlertDescription>No more reps remaining!</AlertDescription>
+	</Alert>
+
+
+	<Div Padding="Padding.Is3" Margin="Margin.IsAuto.OnX" Style="width:33%">
+
+		<Card Margin="Margin.Is5.FromTop" Shadow="Shadow.Default">
+			<CardBody>
+				<Heading Size="HeadingSize.Is4" Margin="Margin.Is3.FromBottom.Is3.FromTop" TextAlignment="TextAlignment.Center">
+					You are now doing:
+				</Heading>
+
+				<Heading Size="HeadingSize.Is2" TextColor="TextColor.Secondary" Margin="Margin.Is3.FromBottom.Is3.FromTop" TextAlignment="TextAlignment.Center">
+					@Exercise.Description
+				</Heading>
+
+				<Heading Size="HeadingSize.Is6" Margin="Margin.Is3.FromBottom.Is3.FromTop" TextAlignment="TextAlignment.Center">
+					Category: @Exercise.Type
+				</Heading>
+
+				<Divider></Divider>
+				<Heading Size="HeadingSize.Is1" Margin="Margin.Is5.FromBottom.Is5.FromTop" TextAlignment="TextAlignment.Center">
+					@FormattedTime
+				</Heading>
+
+				<Div TextAlignment="TextAlignment.Center" Margin="Margin.Is5.FromBottom.Is3.FromTop">
+					<Button Type="ButtonType.Button" Color="Color.Primary" @onclick="StartCountdown" disabled="@IsRunning">Start</Button>
+					<Button Type="ButtonType.Button" Color="Color.Danger" @onclick="StopCountdown" disabled="@(IsRunning == false)">Stop</Button>
+					<Button Type="ButtonType.Button" Color="Color.Dark" @onclick="ResetCountdown">Reset</Button>
+				</Div>
+
+				<Divider></Divider>
+				<Progress>
+				<ProgressBar Style="background-color:#F27405!important;" Value="PercentageRemaining"></ProgressBar>
+				</Progress>
+				
+				@if (RemainingReps > 0)
+				{
+					<Heading Size="HeadingSize.Is6" TextColor="TextColor.Secondary" Margin="Margin.Is3.FromBottom.Is3.FromTop" TextAlignment="TextAlignment.Center">
+						Reps remaining: @RemainingReps
+					</Heading>
+				}
+				else
+				{
+					<Heading @onclick="() => GoBack()" Size="HeadingSize.Is6" TextColor="TextColor.Primary" Margin="Margin.Is3.FromBottom.Is3.FromTop" TextAlignment="TextAlignment.Center">
+						Finished!
+						
+					</Heading>
+
+					<Button Block Size="Size.Small" TextAlignment="TextAlignment.Center" Clicked="() => GoBack()">Go back to workout</Button>
+					
+				}
+
+			</CardBody>
+
+		</Card>
+	</Div>
+</Div>
+
+

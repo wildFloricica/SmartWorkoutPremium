@@ -13,4 +13,6 @@ public interface IExerciseLogRepository
 
 	void DeleteExerciseLog(int exerciseLogId);
 
+	ExerciseLogDTO GetExerciseLogById(int exerciseLogId);
+
 }	

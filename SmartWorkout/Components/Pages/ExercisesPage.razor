@@ -1,7 +1,8 @@
 ﻿@page "/exercises"
 @using SmartWorkout.Entities
 @rendermode InteractiveServer
-<h3>Exercises</h3>
+
+<Heading Size="HeadingSize.Is2" Padding="Padding.Is3" TextAlignment="TextAlignment.Center">Exercises</Heading>
 <DataGrid TItem="Exercise"
 		  Data="@Exercises"
 		  Filterable

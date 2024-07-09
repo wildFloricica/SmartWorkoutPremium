@@ -1,59 +1,94 @@
-﻿
-@using SmartWorkout.Entities
+﻿@using SmartWorkout.Entities
 @using SmartWorkout.ExtensionMethod
 @page "/users/add"
 @page "/users/edit/{UserId:int}"
 @rendermode InteractiveServer
+<Div Margin="Margin.IsAuto.OnX" style="background:url(background.jpg);background-size:cover;opacity:90%;height:90vh">
 
-<h3>Add user</h3>
-<EditForm EditContext="@EditContext" OnValidSubmit="@SaveCurrentUser" FormName="AddUser">
-	<DataAnnotationsValidator/>
+	<EditForm Model="User" OnValidSubmit="@SaveCurrentUser">
+		<DataAnnotationsValidator />
+		<Div Padding="Padding.Is3" Margin="Margin.IsAuto.OnX" Style="width:33%">
 
-	<div class="form-group">
-		<label>First Name :</label>
-		<div>
-			<InputText @bind-Value="User.FirstName" class="form-control col-sm-3"/>
-			<ValidationMessage For="@(() => User.FirstName)"/>
-		</div>
-	</div>
+			<Card Margin="Margin.Is5.FromTop" Shadow="Shadow.Default">
+				<CardBody>
+					@if (UserId != null)
+					{
+						<Heading Size="HeadingSize.Is2" Margin="Margin.Is3.FromBottom.Is3.FromTop" TextAlignment="TextAlignment.Center">
+							Edit user
+						</Heading>
+					}
+					else
+					{
+						<Heading Size="HeadingSize.Is2" Margin="Margin.Is3.FromBottom.Is3.FromTop" TextAlignment="TextAlignment.Center">
+							Create new user
+						</Heading>
+					}
+					
 
-	<div class="form-group">
-		<label>Last Name :</label>
-		<div>
-			<InputText @bind-Value="User.LastName" class="form-control col-sm-3"/>
-			<ValidationMessage For="@(() => User.LastName)"/>
-		</div>
-	</div>
-	
-	<div class="form-group">
-		<label>Email :</label>
-		<div>
-			<InputText @bind-Value="User.Email" class="form-control col-sm-3"/>
-			<ValidationMessage For="@(() => User.Email)"/>
-		</div>
-	</div>
-	<div class="form-group">
-		<label>Birthday :</label>
-		<div>
-			<InputDate @bind-Value="User.Birthday" class="form-control col-sm-3"/>
-			<ValidationMessage For="@(() => User.Birthday)"/>
-		</div>
-	</div>
-	
+					<Field>
+						<FieldLabel>
+							First Name
+						</FieldLabel>
+						<FieldBody>
+							<TextEdit Placeholder="e.g. Jackie" @bind-Text="User.FirstName"/>
+							<ValidationMessage For="@(() => User.FirstName)"/>
+						</FieldBody>
+					</Field>
+
+					<Field>
+						<FieldLabel>
+							Last Name
+						</FieldLabel>
+						<FieldBody>
+							<TextEdit Placeholder="e.g. Chan" @bind-Text="User.LastName"/>
+							<ValidationMessage For="@(() => User.LastName)"/>
+						</FieldBody>
+					</Field>
+
+					<Field>
+						<FieldLabel>
+							Email
+						</FieldLabel>
+						<FieldBody>
+							<TextEdit Role="TextRole.Email" Placeholder="e.g. example@smartworkout.com" @bind-Text="User.Email"/>
+							<ValidationMessage For="@(() => User.Email)"/>
+						</FieldBody>
+					</Field>
+
+					<Field>
+						<FieldLabel>
+							Birthday
+						</FieldLabel>
+						<FieldBody>
+							<DateEdit @bind-Date="User.Birthday"/>
+							<ValidationMessage For="@(() => User.Birthday)"/>
+						</FieldBody>
+					</Field>
+
+					<Field>
+						<FieldLabel>
+							Gender
+							<FieldBody>
+								<Select @bind-SelectedValue="@User.Gender">
+									@foreach (Gender gender in Enum.GetValues(typeof(Gender)))
+									{
+										<SelectItem Value="@gender">@gender.GetEnumDescription()</SelectItem>
+									}
+								</Select>
+							</FieldBody>
+						</FieldLabel>
+					</Field>
 
 
-	<div class="form-group">
-		<label> Select your gender: </label>
-		<InputSelect @bind-Value="@User.Gender">
+					<Field>
+						<Button Type="ButtonType.Submit" Color="Color.Primary" Block>
+							Save
+						</Button>
+					</Field>
 
-			@foreach (Gender gender in Enum.GetValues(typeof(Gender)))
-			{
-				<option value="@gender">@gender.GetEnumDescription()</option>
-			}
-		</InputSelect>
-		<ValidationMessage For="@(() => User.Gender)"/>
-	</div>
-	<div class="form-group">
-		<button type="submit" class="btn btn-primary">Save</button>
-	</div>
-</EditForm>
+
+				</CardBody>
+			</Card>
+		</Div>
+	</EditForm>
+</Div>

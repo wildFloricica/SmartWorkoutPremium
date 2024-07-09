@@ -1,11 +1,12 @@
 ﻿@using SmartWorkout.Entities
 @page "/exercise-logs"
 @rendermode InteractiveServer
-<h3>Exercise Logs</h3>
+<Heading Size="HeadingSize.Is2" Padding="Padding.Is3" TextAlignment="TextAlignment.Center">Exercise Logs</Heading>
 <DataGrid TItem="ExerciseLog"
           Data = "@ExerciseLogs"
-          Filterable
+          Filterable="true"
           Responsive
+		
           FilterMode="DataGridFilterMode.Menu">
 	<DataGridColumn TItem="ExerciseLog" Field="Exercise.Description" Caption="Exercise"></DataGridColumn>
 	<DataGridColumn TItem="ExerciseLog" Field="Workout.Name" Caption="Workout"></DataGridColumn>

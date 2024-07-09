@@ -1,27 +1,59 @@
 ﻿@page "/exercises/add"
 @page "/exercises/edit/{ExerciseId:int}"
+@using SmartWorkout.Entities
 @rendermode InteractiveServer
-<h3>Add Exercises</h3>
 
-<EditForm Model="@Exercise" OnSubmit="@SaveCurrentExercise" FormName="AddExercise">
-	<div class="form-group">
+<Div Margin="Margin.IsAuto.OnX" style="background:url(background.jpg);background-size:cover;opacity:90%;height:90vh">
 
-		<label>Description :</label>
-		<div>
-			<InputText @bind-Value="Exercise.Description" class="form-control col-sm-3"/>
-			<ValidationMessage For="@(() => Exercise.Description)"/>
-		</div>
-	</div>
+	<EditForm Model="Exercise" OnValidSubmit="@SaveCurrentExercise">
+		<DataAnnotationsValidator />
+		<Div Padding="Padding.Is3" Margin="Margin.IsAuto.OnX" Style="width:33%">
 
-	<div class="form-group">
-		<label> Type :</label>
-		<div>
-			<InputText @bind-Value="Exercise.Type" class="form-control col-sm-3" />
-			<ValidationMessage For="@(() => Exercise.Type)" />
-		</div>
-	</div>
+			<Card Margin="Margin.Is5.FromTop" Shadow="Shadow.Default">
+				<CardBody>
+					@if (ExerciseId != null)
+					{
+						<Heading Size="HeadingSize.Is2" Margin="Margin.Is3.FromBottom.Is3.FromTop" TextAlignment="TextAlignment.Center">
+							Edit exercise
+						</Heading>
+					}
+					else
+					{
+						<Heading Size="HeadingSize.Is2" Margin="Margin.Is3.FromBottom.Is3.FromTop" TextAlignment="TextAlignment.Center">
+							Create new exercise
+						</Heading>
+					}
+					
 
-	<div class="form-group">
-		<button type="submit" class="btn btn-primary">Save</button>
-	</div>
-</EditForm>
+					<Field>
+						<FieldLabel>
+							Exercise Description
+						</FieldLabel>
+						<FieldBody>
+							<TextEdit Placeholder="e.g. Push-ups" @bind-Text="Exercise.Description"/>
+							<ValidationMessage For="@(() => Exercise.Description)"/>
+						</FieldBody>
+					</Field>
+
+					<Field>
+						<FieldLabel>
+							Type
+						</FieldLabel>
+						<FieldBody>
+							<TextEdit Placeholder="e.g. Chan" @bind-Text="Exercise.Type"/>
+							<ValidationMessage For="@(() => Exercise.Type)"/>
+						</FieldBody>
+					</Field>
+
+					<Field>
+						<Button Type="ButtonType.Submit" Color="Color.Primary" Block>
+							Save
+						</Button>
+					</Field>
+
+
+				</CardBody>
+			</Card>
+		</Div>
+	</EditForm>
+</Div>

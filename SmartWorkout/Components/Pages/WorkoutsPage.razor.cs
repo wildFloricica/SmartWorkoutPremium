@@ -1,5 +1,6 @@
 ﻿using Blazorise.DataGrid;
 using Microsoft.AspNetCore.Components;
+using SmartWorkout.Components.Services.Interfaces;
 using SmartWorkout.DTO;
 using SmartWorkout.Entities;
 using SmartWorkout.Repositories.Implementations;
@@ -14,6 +15,7 @@ public partial class WorkoutsPage : ComponentBase
 	[Inject] public IWorkoutRepository WorkoutRepository { get; set; }
 	[Inject] public IUserRepository UserRepository { get; set; }
 
+	[Inject] public IAuthorizationService AuthorizationService { get; set; }
 	[Parameter] public int? UserId { get; set; }  
 
 
@@ -21,7 +23,7 @@ public partial class WorkoutsPage : ComponentBase
 	
 	public UserDTO User { get; set; }
 
-	
+	public UserDTO CurrentUser { get; set; }
 	private Workout SelectedWorkout { get; set; }
 
 	private DeleteConfirmationDialog DeleteConfirmation { get; set; }
@@ -68,11 +70,16 @@ public partial class WorkoutsPage : ComponentBase
 			Workouts = WorkoutRepository.GetAllWorkoutsByUserId(UserId.Value);
 			UserIdIsPresent = true;
 			User = UserRepository.GetUserById(UserId);
+			
 		}
 		else
 		{
 			Workouts = WorkoutRepository.GetWorkouts();
 		}
+
+		CurrentUser = AuthorizationService.GetCurrentUser();
 	}
+
+
 
 }

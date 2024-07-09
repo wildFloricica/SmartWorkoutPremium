@@ -1,5 +1,6 @@
 ﻿using Blazorise.DataGrid;
 using Microsoft.AspNetCore.Components;
+using SmartWorkout.Components.Services.Interfaces;
 using SmartWorkout.DTO;
 using SmartWorkout.Entities;
 using SmartWorkout.Repositories.Implementations;
@@ -21,6 +22,8 @@ public partial class AddOrEditExerciseLogPage:ComponentBase
 	[Inject]
 	public NavigationManager NavigationManager { get; set; }
 
+	[Inject]
+	public IAuthorizationService AuthorizationService { get; set; }
 	[SupplyParameterFromForm]
 	public ExerciseLogDTO ExerciseLog { get; set; } = new ExerciseLogDTO();
 
@@ -89,6 +92,14 @@ public partial class AddOrEditExerciseLogPage:ComponentBase
 		if (context != null && context.Item != null)
 		{
 			NavigationManager.NavigateTo($"/exercise-log/edit/{context.Item.Id}");
+		}
+	}
+
+	public void StartWorkout(EditCommandContext<ExerciseLog> context)
+	{
+		if (context != null && context.Item != null)
+		{
+			NavigationManager.NavigateTo($"/stopwatch/{context.Item.Id}");
 		}
 	}
 }

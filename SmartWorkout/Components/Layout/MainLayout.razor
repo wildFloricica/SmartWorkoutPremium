@@ -12,12 +12,11 @@
 			{
 				<Dropdown>
 					<DropdownToggle Color="Color.Primary">
+						<span class="fas fa-user" style="margin-right:1rem"></span>
 						Hello, @User.FirstName @User.LastName
 					</DropdownToggle>
 					<DropdownMenu>
-						<DropdownItem>Action</DropdownItem>
-						<DropdownDivider />
-						<DropdownItem>Another Action</DropdownItem>
+						<DropdownItem Clicked="() => LogOut()" Margin="Margin.Is0">Log Out</DropdownItem>
 					</DropdownMenu>
 				</Dropdown>
 			}
@@ -27,11 +26,10 @@
 			}
 
 		</div>
-
-		<article class="content px-4">
-			@Body 
-		</article>
-
+		<div>
+			@Body
+		</div>
+		
 
 	</main>
 

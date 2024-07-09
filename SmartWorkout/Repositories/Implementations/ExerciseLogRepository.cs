@@ -53,4 +53,22 @@ public class ExerciseLogRepository : IExerciseLogRepository
 		}
 	
 	}
+
+	public ExerciseLogDTO GetExerciseLogById(int exerciseLogId)
+	{
+		var existingExerciseLog = _context.ExerciseLogs.FirstOrDefault(x => x.Id == exerciseLogId);
+
+		if (existingExerciseLog != null)
+		{
+			return new ExerciseLogDTO()
+			{
+				Duration = existingExerciseLog.Duration,
+				ExerciseId = existingExerciseLog.ExerciseId,
+				Reps = existingExerciseLog.Reps,
+				WorkoutId = existingExerciseLog.WorkoutId
+			};
+		}
+
+		throw new Exception("Exercise Log not found!");
+	}
 }

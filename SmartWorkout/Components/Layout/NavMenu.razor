@@ -1,44 +1,54 @@
 ﻿@rendermode InteractiveServer
-<div class="top-row ps-3 navbar navbar-dark">
-	<div class="container-fluid">
-		<a class="navbar-brand" href="">SmartWorkout</a>
-	</div>
+<div class="top-row ps-3 navbar" style="background-color:#03A678;">
+	<Div class="container-fluid" Style="justify-content:flex-start">
+		<Span TextSize="TextSize.Large" class="fas fa-stopwatch-20" Margin="Margin.Is3.FromEnd" TextColor="TextColor.White">
+		</Span>
+		<Text TextSize="TextSize.Large" TextColor="TextColor.Light"href="">SmartWorkout</Text>
+	</Div>
 </div>
 
 <input type="checkbox" title="Navigation menu" class="navbar-toggler" />
 
-<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
+<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()" style="!important; background-image:linear-gradient(180deg, rgba(247,247,247,1) 34%, rgba(174,220,194,1) 78%, rgba(116,207,174,1) 100%);;font-family:Roboto !important;">
 	<nav class="flex-column">
 
 		<div hidden="@(!IsAdmin)" class="nav-item px-3">
 			<NavLink class="nav-link" href="users">
-				<Span class="fas fa-users" Margin="Margin.Is3.FromEnd">
+				<Span class="fas fa-users" Margin="Margin.Is3.FromEnd" TextColor="TextColor.Primary">
 				</Span>
-				<Text>Users</Text>
+				<Text TextColor="TextColor.Primary">USERS</Text>
 			</NavLink>
 		</div>
 
 		<div hidden="@(!IsAdmin)" class="nav-item px-3">
 			<NavLink class="nav-link" href="exercises">
-				<Span class="fas fa-dumbbell" Margin="Margin.Is3.FromEnd">
+				<Span class="fas fa-dumbbell" Margin="Margin.Is3.FromEnd" TextColor="TextColor.Primary">
 				</Span>
-				<Text>Exercises</Text>
+				<Text  TextColor="TextColor.Primary">EXERCISES</Text>
+			</NavLink>
+		</div>
+		
+		<div style="margin-top:1rem" hidden="@(IsAdmin)" class="nav-item px-3">
+			<NavLink  class="nav-link" @onclick="() => GoToWorkouts()">
+				<Span class="fas fa-table-list" Margin="Margin.Is3.FromEnd" TextColor="TextColor.Primary">
+				</Span>
+				<Text TextColor="TextColor.Primary">WORKOUTS</Text>
 			</NavLink>
 		</div>
 
 		<div hidden="@(!IsAdmin)" class="nav-item px-3">
 			<NavLink class="nav-link" href="workouts">
-				<Span class="fas fa-table-list" Margin="Margin.Is3.FromEnd">
+				<Span class="fas fa-table-list" Margin="Margin.Is3.FromEnd" TextColor="TextColor.Primary">
 				</Span>
-				<Text>Workouts</Text>
+				<Text TextColor="TextColor.Primary">WORKOUTS</Text>
 			</NavLink>
 		</div>
 
 		<div class="nav-item px-3">
 			<NavLink class="nav-link" href="exercise-logs">
-				<Span class="fas fa-clock-rotate-left" Margin="Margin.Is3.FromEnd">
+				<Span class="fas fa-clock-rotate-left" Margin="Margin.Is3.FromEnd" TextColor="TextColor.Primary">
 				</Span>
-				<Text>Exercise Logs</Text>
+				<Text TextColor="TextColor.Primary">EXERCISE LOGS</Text>
 			</NavLink>
 		</div>
 

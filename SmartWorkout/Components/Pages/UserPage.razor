@@ -1,11 +1,11 @@
 ﻿@using SmartWorkout.Entities
 @page "/users"
 @rendermode InteractiveServer
-<h3 >Users</h3>
-
+<Heading Size="HeadingSize.Is2" Padding="Padding.Is3" TextAlignment="TextAlignment.Center">Users</Heading>
 
 <DataGrid TItem="User"
 		  Data="@Users"
+		  Padding="Padding.Is1"
 		  Filterable
 		  FilterMode="DataGridFilterMode.Menu"
 		  Responsive

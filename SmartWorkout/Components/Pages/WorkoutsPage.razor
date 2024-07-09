@@ -4,11 +4,11 @@
 @rendermode InteractiveServer
 @if (UserId != null)
 {
-	<h3>@User.FirstName @User.LastName`s workouts</h3>
+	<Heading Size="HeadingSize.Is2" Padding="Padding.Is3" TextAlignment="TextAlignment.Center">@User.FirstName @User.LastName`s workouts</Heading>
 }
 else
 {
-	<h3>All Workouts</h3>
+	<Heading Size="HeadingSize.Is2" Padding="Padding.Is3" TextAlignment="TextAlignment.Center">All workouts</Heading>
 }
 
 <DataGrid TItem="Workout"
@@ -46,14 +46,22 @@ else
 
 	<DataGridCommandColumn TItem="Workout" DeleteCommandAllowed="false" NewCommandAllowed="@UserIdIsPresent">
 		<NewCommandTemplate>
-			<Button Color="Color.Primary" Clicked="() => AddWorkout()">
-				<Icon Name="IconName.Add"></Icon>
-				Add new Workout
-			</Button>
+			@if (CurrentUser.isAdmin)
+			{
+				<Button Color="Color.Primary" Clicked="() => AddWorkout()">
+					<Icon Name="IconName.Add"></Icon>
+					Add new Workout
+				</Button>
+			}
+
 		</NewCommandTemplate>
 		<EditCommandTemplate>
-			<Button Color="Color.Dark" Clicked="() => EditWorkout(context)">Edit</Button>
-			<Button Color="Color.Danger" Clicked="() => OnDeleteButtonClicked(context)">Delete</Button>
+			<Button Color="Color.Dark" Clicked="() => EditWorkout(context)">View workout</Button>
+			@if (CurrentUser.isAdmin)
+			{
+				<Button Color="Color.Danger" Clicked="() => OnDeleteButtonClicked(context)">Delete</Button>
+			}
+			
 		</EditCommandTemplate>
 	</DataGridCommandColumn>
 

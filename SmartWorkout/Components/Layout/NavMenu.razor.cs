@@ -8,6 +8,8 @@ namespace SmartWorkout.Components.Layout
 	{
 		[Inject]
 		public IAuthorizationService AuthorizationService { get; set; }
+		[Inject]
+		public NavigationManager NavigationManager { get; set; }
 		private UserDTO? User { get; set; }
 
 		bool IsAdmin = false;
@@ -26,6 +28,11 @@ namespace SmartWorkout.Components.Layout
 					IsAdmin = User.isAdmin;
 				}
 			}
+		}
+
+		public void GoToWorkouts()
+		{
+			NavigationManager.NavigateTo($"/workouts/{User.Id}");
 		}
 	}
 }

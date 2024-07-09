@@ -5,73 +5,49 @@
 @using SmartWorkout.Entities
 @using SmartWorkout.ExtensionMethod
 
+<Div style="background:url(background.jpg);background-size:cover;width:99vw;height:90vh">
+	<Alert Color="Color.Danger" Visible="@(!ErrorMessage.IsNullOrEmpty())">
+		<AlertMessage>Login Failed!</AlertMessage>
+		<CloseButton/>
+		<AlertDescription>You have entered invalid credentials</AlertDescription>
+	</Alert>
 
-<Alert Color="Color.Danger" Visible="@(!ErrorMessage.IsNullOrEmpty())">
-	<AlertMessage>Login Failed!</AlertMessage>
-	<CloseButton />
-	<AlertDescription>You have entered invalid credentials</AlertDescription>
-</Alert>
+	<Heading Size="HeadingSize.Is1" Padding="Padding.Is3.Is5.FromTop" TextAlignment="TextAlignment.Center"> Welcome to SmartWorkout</Heading>
+	<Heading Size="HeadingSize.Is5" TextAlignment="TextAlignment.Center"> Your fitness companion for a healthier life!</Heading>
+	<EditForm Model="LoginDTO" OnValidSubmit="@Login">
+		<DataAnnotationsValidator/>
+		<Div Margin="Margin.IsAuto.OnX.Is5.FromTop" Padding="Padding.Is3" Style="width:25%">
 
-
-
-@*<EditForm Model="@LoginDTO" OnValidSubmit="@Login" FormName="LoginUser">
-	<DataAnnotationsValidator />
-
-	<div class="form-group">
-		<label>Email :</label>
-		<div>
-			<InputText @bind-Value="LoginDTO.Email" class="form-control col-sm-3" />
-			<ValidationMessage For="@(() => LoginDTO.Email)" />
-		</div>
-	</div>
-
-	<div class="form-group">
-		<label>Password :</label>
-		<div>
-			<InputText @bind-Value="LoginDTO.Password" class="form-control col-sm-3" />
-			<ValidationMessage For="@(() => LoginDTO.Password)" />
-		</div>
-	</div>
-
-	<div class="form-group">
-		<button type="submit" class="btn btn-primary">Login</button>
-	</div>
-</EditForm>*@
-<Heading Size="HeadingSize.Is1" Padding="Padding.Is3" TextAlignment="TextAlignment.Center"> Welcome to SmartWorkout</Heading>
-<Heading Size="HeadingSize.Is5" TextAlignment="TextAlignment.Center"> Your fitness companion for a healthier life!</Heading>
-<EditForm Model="LoginDTO" OnValidSubmit="@Login">
-	<DataAnnotationsValidator />
-	<Div Margin="Margin.IsAuto.OnX.Is5.FromTop" Padding="Padding.Is3" Style="width:25%">
-
-		<Card Shadow="Shadow.Default">
-			<CardBody>
-				<Heading Size="HeadingSize.Is2" Margin="Margin.Is3.FromBottom.Is3.FromTop" TextAlignment="TextAlignment.Center">
-					Sign in to your account
-				</Heading>
-				<Field>
-					<FieldLabel>
-						Email
-					</FieldLabel>
-					<FieldBody>
-						<TextEdit Placeholder="email@smartworkout.com" @bind-Text="LoginDTO.Email"/>
-						<ValidationMessage For="@(() => LoginDTO.Email)"/>
-					</FieldBody>
-				</Field>
-				<Field>
-					<FieldLabel>
-						Password
-					</FieldLabel>
-					<FieldBody>
-						<TextEdit Placeholder="********" @bind-Text="LoginDTO.Password" autocomplete="new-password"/>
-						<ValidationMessage For="@(() => LoginDTO.Password)"/>
-					</FieldBody>
-				</Field>
-				<Field>
-					<Button Type="ButtonType.Submit" Color="Color.Primary" Block>
-						Sign in
-					</Button>
-				</Field>
-			</CardBody>
-		</Card>
-	</Div>
-</EditForm>
+			<Card Shadow="Shadow.Default">
+				<CardBody>
+					<Heading Size="HeadingSize.Is2" Margin="Margin.Is3.FromBottom.Is3.FromTop" TextAlignment="TextAlignment.Center">
+						Sign in to your account
+					</Heading>
+					<Field>
+						<FieldLabel>
+							Email
+						</FieldLabel>
+						<FieldBody>
+							<TextEdit Role="TextRole.Email" Placeholder="email@smartworkout.com" @bind-Text="LoginDTO.Email"/>
+							<ValidationMessage For="@(() => LoginDTO.Email)"/>
+						</FieldBody>
+					</Field>
+					<Field>
+						<FieldLabel>
+							Password
+						</FieldLabel>
+						<FieldBody>
+							<TextEdit Role="TextRole.Password" Placeholder="********" @bind-Text="LoginDTO.Password" autocomplete="new-password"/>
+							<ValidationMessage For="@(() => LoginDTO.Password)"/>
+						</FieldBody>
+					</Field>
+					<Field>
+						<Button Type="ButtonType.Submit" Color="Color.Primary" Block>
+							Sign in
+						</Button>
+					</Field>
+				</CardBody>
+			</Card>
+		</Div>
+	</EditForm>
+</Div>

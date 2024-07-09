@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartWorkout.Context;
 
@@ -11,9 +12,11 @@ using SmartWorkout.Context;
 namespace SmartWorkout.Migrations
 {
     [DbContext(typeof(SmartWorkoutContext))]
-    partial class SmartWorkoutContextModelSnapshot : ModelSnapshot
+    [Migration("20240708072721_Removed-Password-For-User")]
+    partial class RemovedPasswordForUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

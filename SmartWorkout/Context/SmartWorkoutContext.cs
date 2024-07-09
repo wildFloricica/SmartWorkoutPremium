@@ -38,6 +38,23 @@ public class SmartWorkoutContext : DbContext
 			.HasForeignKey(el => el.WorkoutId)
 			.HasConstraintName("Fk_ExerciseLogs_Workouts");
 
+		var trainer = new User
+		{
+			Id = 1,
+			Email = "cristian@yahoo.com",
+			Gender = "M",
+			FirstName = "Cristian",
+			LastName = "Sgaiba",
+			Birthday = DateTime.Today,
+			IsAdmin = true,
+
+		};
+
+		modelBuilder.Entity<User>().HasData(new List<User>
+		{
+			trainer,
+		});
+
 		base.OnModelCreating(modelBuilder);
 	}
 }

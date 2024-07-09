@@ -29,7 +29,7 @@ namespace SmartWorkout.Components.Pages
 			if (UserId != null)
 			{
 				WorkoutRepository.SaveWorkout(Workout);
-				InvokeAsync(() => NavigationManager.NavigateTo($"/users"));
+				InvokeAsync(() => NavigationManager.NavigateTo($"/workouts/{User.Id}"));
 			}
 		}
 

@@ -1,5 +1,6 @@
 ﻿using Blazorise.DataGrid;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SmartWorkout.DTO;
 using SmartWorkout.Entities;
@@ -9,6 +10,8 @@ namespace SmartWorkout.Components.Pages
 {
 	public partial class AddOrEditUserPage : ComponentBase
 	{
+		public EditContext EditContext { get; set; }
+		public ValidationMessageStore MessageStore { get; set; }
 		[Inject]
 		public IUserRepository UserRepository { get; set; }
 
@@ -20,19 +23,32 @@ namespace SmartWorkout.Components.Pages
 
 		[Parameter]
 		public int? UserId { get; set; }
-		public async Task SaveCurrentUser()
+		public void SaveCurrentUser(EditContext editContext)
 		{
 			if (UserId == null)
 			{
 				UserRepository.SaveUser(User);
-				await InvokeAsync(() => NavigationManager.NavigateTo("/users"));
 			}
 			else
 			{
-				UserRepository.UpdateUser(UserId,User);
-				await InvokeAsync(() => NavigationManager.NavigateTo("/users"));
+				UserRepository.UpdateUser(UserId, User);
 			}
 
+			// Navigate to the users page
+			NavigationManager.NavigateTo("/users");
+		}
+
+		private void HandleFieldChanged(object? sender, FieldChangedEventArgs args)
+		{
+			MessageStore?.Clear();
+
+			var exists = UserRepository.existsByEmail(User.Email);
+			if (exists && UserRepository.GetUserByEmail(User.Email).Id != UserId && User.Email.Length > 0)
+			{
+				MessageStore.Add(() => User.Email, "Email is already used!");
+				EditContext.NotifyValidationStateChanged();
+
+			}
 		}
 
 		protected override void OnParametersSet()
@@ -41,8 +57,13 @@ namespace SmartWorkout.Components.Pages
 			{
 				User = UserRepository.GetUserById(UserId);
 			}
+
+			EditContext = new EditContext(User);
+			MessageStore = new ValidationMessageStore(EditContext);
+
+			EditContext.OnFieldChanged += HandleFieldChanged;
 		}
 
-		
+
 	}
 }

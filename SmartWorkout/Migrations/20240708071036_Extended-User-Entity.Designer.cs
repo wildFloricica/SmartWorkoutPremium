@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartWorkout.Context;
 
@@ -11,9 +12,11 @@ using SmartWorkout.Context;
 namespace SmartWorkout.Migrations
 {
     [DbContext(typeof(SmartWorkoutContext))]
-    partial class SmartWorkoutContextModelSnapshot : ModelSnapshot
+    [Migration("20240708071036_Extended-User-Entity")]
+    partial class ExtendedUserEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -84,7 +87,8 @@ namespace SmartWorkout.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(450)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -101,25 +105,13 @@ namespace SmartWorkout.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("Email")
-                        .IsUnique()
-                        .HasFilter("[Email] IS NOT NULL");
-
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Birthday = new DateTime(2024, 7, 8, 0, 0, 0, 0, DateTimeKind.Local),
-                            Email = "cristian@yahoo.com",
-                            FirstName = "Cristian",
-                            Gender = "M",
-                            IsAdmin = true,
-                            LastName = "Sgaiba"
-                        });
                 });
 
             modelBuilder.Entity("SmartWorkout.Entities.Workout", b =>

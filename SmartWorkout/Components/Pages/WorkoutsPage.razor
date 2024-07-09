@@ -1,7 +1,16 @@
-﻿@page "/workouts"
+﻿@page "/workouts/{UserId:int?}"
+
 @using SmartWorkout.Entities
 @rendermode InteractiveServer
-<h3>Workouts</h3>
+@if (UserId != null)
+{
+	<h3>@User.FirstName @User.LastName`s workouts</h3>
+}
+else
+{
+	<h3>All Workouts</h3>
+}
+
 <DataGrid TItem="Workout"
 		  Data="@Workouts"
 		  Filterable
@@ -10,24 +19,42 @@
 		  Editable>
 	<DataGridColumn TItem="Workout" Field="Name" Caption="Name"></DataGridColumn>
 	<DataGridColumn TItem="Workout" Field="Date" DisplayFormat="{0:MM/dd/yyyy}" Caption="Date"></DataGridColumn>
-	<DataGridColumn TItem="Workout" Field="User.FirstName" Caption="User">
-		<DisplayTemplate>
-			@{
-				var user = (context as Workout)?.User;
 
-				if (user != null)
-				{
-					@($"{user.FirstName} {user.LastName}")
+
+	@if (UserId != null)
+	{
+	}
+	else
+	{
+		<DataGridColumn TItem="Workout" Field="User.FirstName" Caption="User">
+			<DisplayTemplate>
+				@{
+					var user = (context as Workout)?.User;
+
+					if (user != null)
+					{
+						@($"{user.FirstName} {user.LastName}")
+					}
 				}
-			}
-		</DisplayTemplate>
-	</DataGridColumn>
-	<DataGridCommandColumn TItem="Workout" DeleteCommandAllowed="false" NewCommandAllowed="false">
+			</DisplayTemplate>
+		</DataGridColumn>
+	}
+
+
+
+	<DataGridCommandColumn TItem="Workout" DeleteCommandAllowed="false" NewCommandAllowed="@UserIdIsPresent">
+		<NewCommandTemplate>
+			<Button Color="Color.Primary" Clicked="() => AddWorkout()">
+				<Icon Name="IconName.Add"></Icon>
+				Add new Workout
+			</Button>
+		</NewCommandTemplate>
 		<EditCommandTemplate>
 			<Button Color="Color.Dark" Clicked="() => EditWorkout(context)">Edit</Button>
 			<Button Color="Color.Danger" Clicked="() => OnDeleteButtonClicked(context)">Delete</Button>
 		</EditCommandTemplate>
 	</DataGridCommandColumn>
+
 </DataGrid>
 
 <DeleteConfirmationDialog @ref="DeleteConfirmation" OnConfirm="HandleDeleteConfirmed"></DeleteConfirmationDialog>

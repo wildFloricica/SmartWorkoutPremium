@@ -3,6 +3,8 @@ using Blazorise.Bootstrap;
 using Blazorise.Icons.FontAwesome;
 using Microsoft.EntityFrameworkCore;
 using SmartWorkout.Components;
+using SmartWorkout.Components.Services.Implementations;
+using SmartWorkout.Components.Services.Interfaces;
 using SmartWorkout.Context;
 using SmartWorkout.Entities;
 using SmartWorkout.Repositories.Implementations;
@@ -28,6 +30,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IExerciseRepository, ExerciseRepository>();
 builder.Services.AddScoped<IWorkoutRepository,WorkoutRepository>();
 builder.Services.AddScoped<IExerciseLogRepository, ExerciseLogRepository>();
+builder.Services.AddScoped<IAuthorizationService, AuthorizationService>();
 
 var app = builder.Build();
 

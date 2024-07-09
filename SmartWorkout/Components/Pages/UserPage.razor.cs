@@ -41,6 +41,13 @@ public partial class UserPage : ComponentBase
 		}
 	}
 
+	public void ShowWorkouts(EditCommandContext<User> context)
+	{
+		if (context != null && context.Item != null)
+		{
+			NavigationManager.NavigateTo($"workouts/{context.Item.Id}");
+		}
+	}
 	public void AddUser()
 	{
 		NavigationManager.NavigateTo("/users/add");
@@ -65,4 +72,6 @@ public partial class UserPage : ComponentBase
 			OnInitialized();
 		}
 	}
+
+	
 }

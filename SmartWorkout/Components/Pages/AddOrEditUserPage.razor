@@ -6,7 +6,7 @@
 @rendermode InteractiveServer
 
 <h3>Add user</h3>
-<EditForm Model="@User" OnValidSubmit="@SaveCurrentUser" FormName="AddUser">
+<EditForm EditContext="@EditContext" OnValidSubmit="@SaveCurrentUser" FormName="AddUser">
 	<DataAnnotationsValidator/>
 
 	<div class="form-group">
@@ -24,7 +24,14 @@
 			<ValidationMessage For="@(() => User.LastName)"/>
 		</div>
 	</div>
-
+	
+	<div class="form-group">
+		<label>Email :</label>
+		<div>
+			<InputText @bind-Value="User.Email" class="form-control col-sm-3"/>
+			<ValidationMessage For="@(() => User.Email)"/>
+		</div>
+	</div>
 	<div class="form-group">
 		<label>Birthday :</label>
 		<div>
@@ -32,6 +39,8 @@
 			<ValidationMessage For="@(() => User.Birthday)"/>
 		</div>
 	</div>
+	
+
 
 	<div class="form-group">
 		<label> Select your gender: </label>

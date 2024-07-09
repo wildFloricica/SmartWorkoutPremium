@@ -12,4 +12,6 @@ public interface IWorkoutRepository
 	void DeleteWorkout(int id);
 
 	WorkoutDTO GetWorkoutById(int id);
+
+	ICollection<Workout> GetAllWorkoutsByUserId(int userId);
 }

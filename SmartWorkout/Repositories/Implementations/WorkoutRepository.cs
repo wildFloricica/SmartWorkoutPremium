@@ -66,4 +66,11 @@ public class WorkoutRepository : IWorkoutRepository
 
 		throw new Exception("Workout not found!");
 	}
+
+	public ICollection<Workout> GetAllWorkoutsByUserId(int userId)
+	{
+		ICollection<Workout> existingWorkouts = _context.Workouts.Where(x => x.UserId == userId).ToList();
+
+		return existingWorkouts;
+	}
 }

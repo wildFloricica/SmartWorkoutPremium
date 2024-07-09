@@ -30,7 +30,8 @@ namespace SmartWorkout.Repositories.Implementations
 				FirstName = user.FirstName,
 				LastName = user.LastName,
 				Birthday = user.Birthday,
-				Gender = user.Gender
+				Gender = user.Gender,
+				Email = user.Email
 			};
 
 
@@ -43,11 +44,12 @@ namespace SmartWorkout.Repositories.Implementations
 			User userToUpdate = _context.Users.FirstOrDefault(x => x.Id == id);
 
 			if (userToUpdate != null)
-			{	
+			{
 				userToUpdate.FirstName = user.FirstName;
 				userToUpdate.LastName = user.LastName;
 				userToUpdate.Birthday = user.Birthday;
 				userToUpdate.Gender = user.Gender;
+				userToUpdate.Email = user.Email;
 				_context.Users.Update(userToUpdate);
 				_context.SaveChanges();
 
@@ -60,7 +62,7 @@ namespace SmartWorkout.Repositories.Implementations
 
 		public void DeleteUser(int? id)
 		{
-			User existingUser = _context.Users.FirstOrDefault( x => x.Id == id);
+			User existingUser = _context.Users.FirstOrDefault(x => x.Id == id);
 
 			if (existingUser != null)
 			{
@@ -71,6 +73,35 @@ namespace SmartWorkout.Repositories.Implementations
 			{
 				throw new Exception("User not found!");
 			}
+		}
+
+		public bool existsByEmail(string email)
+		{
+			User existingUser = _context.Users.FirstOrDefault(x => x.Email == email);
+
+			if (existingUser != null)
+			{
+				return true;
+			}
+			return false;
+		}
+
+		public UserDTO GetUserByEmail(string email)
+		{
+			User existingUser = _context.Users.FirstOrDefault(x => x.Email == email);
+
+			UserDTO existingUserDto = new UserDTO()
+			{
+				Id = existingUser.Id,
+				Birthday = existingUser.Birthday,
+				Email = existingUser.Email,
+				FirstName = existingUser.FirstName,
+				Gender = existingUser.Gender,
+				LastName = existingUser.LastName
+			};
+
+			return existingUserDto;
+
 		}
 
 		public UserDTO GetUserById(int? id)
@@ -86,10 +117,12 @@ namespace SmartWorkout.Repositories.Implementations
 
 			UserDTO existingUserDto = new UserDTO()
 			{
+				Id = existingUser.Id,
 				Birthday = existingUser.Birthday,
 				FirstName = existingUser.FirstName,
 				LastName = existingUser.LastName,
-				Gender = existingUser.Gender
+				Gender = existingUser.Gender,
+				Email = existingUser.Email
 			};
 			return existingUserDto;
 		}

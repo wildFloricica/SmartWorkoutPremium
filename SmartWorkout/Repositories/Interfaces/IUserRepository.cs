@@ -14,4 +14,8 @@ public interface IUserRepository
 	void UpdateUser(int? id,UserDTO user);
 
 	void DeleteUser(int? id);
+
+	bool existsByEmail(string email);
+
+	UserDTO GetUserByEmail(string email);
 }

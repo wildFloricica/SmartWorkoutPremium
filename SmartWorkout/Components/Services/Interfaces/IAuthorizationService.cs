@@ -8,5 +8,6 @@ namespace SmartWorkout.Components.Services.Interfaces
 
 		public UserDTO GetCurrentUser();
 
+		bool IsUserPresent();
 	}
 }

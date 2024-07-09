@@ -97,7 +97,8 @@ namespace SmartWorkout.Repositories.Implementations
 				Email = existingUser.Email,
 				FirstName = existingUser.FirstName,
 				Gender = existingUser.Gender,
-				LastName = existingUser.LastName
+				LastName = existingUser.LastName,
+				isAdmin = existingUser.IsAdmin
 			};
 
 			return existingUserDto;
@@ -122,7 +123,8 @@ namespace SmartWorkout.Repositories.Implementations
 				FirstName = existingUser.FirstName,
 				LastName = existingUser.LastName,
 				Gender = existingUser.Gender,
-				Email = existingUser.Email
+				Email = existingUser.Email,
+				isAdmin = existingUser.IsAdmin
 			};
 			return existingUserDto;
 		}

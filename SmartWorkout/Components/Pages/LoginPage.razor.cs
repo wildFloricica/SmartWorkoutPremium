@@ -27,9 +27,10 @@ namespace SmartWorkout.Components.Pages
 		protected override void OnInitialized()
 		{
 			var user = AuthorizationService.GetCurrentUser();
+
 			if (user != null)
 			{
-				NavigationManager.NavigateTo("/exercise-logs");
+				NavigationManager.NavigateTo("/exercise-logs",true);
 			}
 		}
 
@@ -44,9 +45,7 @@ namespace SmartWorkout.Components.Pages
 				Console.WriteLine(e);
 				ErrorMessage = e.Message;
 			}
-			
 			OnInitialized();
-			
 		}
 	}
 }

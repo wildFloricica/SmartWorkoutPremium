@@ -34,13 +34,27 @@ namespace SmartWorkout.Components.Services.Implementations
 					throw new InvalidCredentialsException("Wrong username or password");
 				}
 			}
-	        throw new InvalidCredentialsException("Wrong username or password");
+	        else
+	        {
+		        throw new InvalidCredentialsException("Wrong username or password");
+			}
+	        
 	        
         }
 
         public UserDTO GetCurrentUser()
         {
 	        return CurrentUser;
+        }
+
+        public bool IsUserPresent()
+        {
+	        if (CurrentUser == null)
+	        {
+		        return false;
+	        }
+
+	        return true;
         }
     }
 }

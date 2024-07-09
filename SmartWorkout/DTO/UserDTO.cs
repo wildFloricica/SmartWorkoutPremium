@@ -17,5 +17,7 @@ public class UserDTO
 	[Required]
 	public string Email { get; set; }
 
+	public bool isAdmin { get; set; }
+
 
 }

@@ -1,25 +1,39 @@
-﻿<Blazorise.ThemeProvider Theme="@_theme">
-<Router AppAssembly="typeof(Program).Assembly">
-	<Found Context="routeData">
-		<RouteView RouteData="routeData" DefaultLayout="typeof(Layout.MainLayout)" />
-		<FocusOnNavigate RouteData="routeData" Selector="h1" />
-	</Found>
-</Router>
-</Blazorise.ThemeProvider>
-@code{
+﻿
+<CascadingAuthenticationState>
+	<Blazorise.ThemeProvider Theme="@_theme">
+		<Router AppAssembly="typeof(Program).Assembly">
+			<Found Context="routeData">
+				<AuthorizeRouteView RouteData="routeData" DefaultLayout="typeof(Layout.MainLayout)">
+
+					<NotAuthorized>
+						You are not authorized
+					</NotAuthorized>
+
+					<Authorizing>
+						You are getting authorized
+					</Authorizing>
+
+				</AuthorizeRouteView>
+				<FocusOnNavigate RouteData="routeData" Selector="h1" />
+			</Found>
+		</Router>
+	</Blazorise.ThemeProvider>
+</CascadingAuthenticationState>
+
+@code {
 
 	private Theme _theme = new Theme
-	{
-		ColorOptions = new ThemeColorOptions()
 		{
+			ColorOptions = new ThemeColorOptions()
+			{
 				Primary = "#03A678",
 				Secondary = "#F27405",
 				Danger = "#c82803",
 				Dark = "#000000",
-				
-		},
-		BackgroundOptions = new ThemeBackgroundOptions()
-		{
+
+			},
+			BackgroundOptions = new ThemeBackgroundOptions()
+			{
 				Primary = "#161616",
 				Body = "#161616",
 				Danger = "#161616",
@@ -30,18 +44,18 @@
 				Secondary = "#161616",
 				Success = "#161616",
 				Warning = "#161616"
-		},
-		SidebarOptions = new ThemeSidebarOptions()
-		{
+			},
+			SidebarOptions = new ThemeSidebarOptions()
+			{
 				BackgroundColor = Color.Dark.ToString()
-		},
-		TextColorOptions = new ThemeTextColorOptions()
-		{
+			},
+			TextColorOptions = new ThemeTextColorOptions()
+			{
 				Primary = "#03A678",
 				Secondary = "#F27405",
-		},
-		IsRounded = true,
-		IsGradient = false
-	};
+			},
+			IsRounded = true,
+			IsGradient = false
+		};
 
 }

@@ -11,8 +11,7 @@ namespace SmartWorkout.Components.Pages
 {
 	public partial class LoginPage : ComponentBase
 	{
-		[Inject]  
-		public IUserRepository UserRepository { get; set; }
+		
 
 		[Inject]
 		public IAuthorizationService AuthorizationService { get; set; }
@@ -26,12 +25,7 @@ namespace SmartWorkout.Components.Pages
 		public string ErrorMessage { get; set; }
 		protected override void OnInitialized()
 		{
-			var user = AuthorizationService.GetCurrentUser();
-
-			if (user != null)
-			{
-				NavigationManager.NavigateTo("/exercise-logs",true);
-			}
+			ErrorMessage = null;
 		}
 
 		public void Login()
@@ -45,7 +39,7 @@ namespace SmartWorkout.Components.Pages
 				Console.WriteLine(e);
 				ErrorMessage = e.Message;
 			}
-			OnInitialized();
+			NavigationManager.NavigateTo("/users",true);
 		}
 	}
 }

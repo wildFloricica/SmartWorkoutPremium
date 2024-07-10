@@ -18,9 +18,9 @@ namespace SmartWorkout.Components.Pages
 
 		protected override void OnInitialized()
 		{
-			User = AuthorizationService.GetCurrentUser();
+			User = null;
 
-			if (User.isAdmin)
+			if (User.IsAdmin)
 			{
 				ExerciseLogs = ExerciseLogRepository.GetExerciseLogs();
 			}

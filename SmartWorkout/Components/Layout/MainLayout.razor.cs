@@ -14,23 +14,11 @@ namespace SmartWorkout.Components.Layout
 
 		bool IsLoggedIn { get; set; } = false;
 
-		protected override void OnParametersSet()
-		{
-			if (AuthorizationService.IsUserPresent())
-			{
-				User = AuthorizationService.GetCurrentUser();
-				if (User != null)
-				{
-					IsLoggedIn = true;
-				}
-			}
 		
-		}
 
 		public void LogOut()
 		{
-			AuthorizationService.LogOut();
-			NavigationManager.NavigateTo("/",true);
+			
 		}
 	}
 }

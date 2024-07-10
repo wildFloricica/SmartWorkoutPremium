@@ -88,7 +88,12 @@ namespace SmartWorkout.Repositories.Implementations
 
 		public UserDTO GetUserByEmail(string email)
 		{
-			User existingUser = _context.Users.FirstOrDefault(x => x.Email == email);
+			User? existingUser = _context.Users.FirstOrDefault(x => x.Email == email);
+
+			if (existingUser == null)
+			{
+				return null;
+			}
 
 			UserDTO existingUserDto = new UserDTO()
 			{
@@ -98,9 +103,8 @@ namespace SmartWorkout.Repositories.Implementations
 				FirstName = existingUser.FirstName,
 				Gender = existingUser.Gender,
 				LastName = existingUser.LastName,
-				isAdmin = existingUser.IsAdmin
+				IsAdmin = existingUser.IsAdmin
 			};
-
 			return existingUserDto;
 
 		}
@@ -124,7 +128,7 @@ namespace SmartWorkout.Repositories.Implementations
 				LastName = existingUser.LastName,
 				Gender = existingUser.Gender,
 				Email = existingUser.Email,
-				isAdmin = existingUser.IsAdmin
+				IsAdmin = existingUser.IsAdmin
 			};
 			return existingUserDto;
 		}

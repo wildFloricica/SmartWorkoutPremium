@@ -1,7 +1,11 @@
 using Blazorise;
 using Blazorise.Bootstrap;
 using Blazorise.Icons.FontAwesome;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using Microsoft.EntityFrameworkCore;
+using SmartWorkout.Authentication;
 using SmartWorkout.Components;
 using SmartWorkout.Components.Services.Implementations;
 using SmartWorkout.Components.Services.Interfaces;
@@ -16,13 +20,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
 	.AddInteractiveServerComponents();
 builder.Services.AddRazorComponents();
-
+builder.Services.AddServerSideBlazor();
 builder.Services.AddBlazorise(options =>
 	{
 		options.Immediate = true;
 	})
 	.AddBootstrapProviders()
 	.AddFontAwesomeIcons();
+
 
 builder.Services.AddDbContext<SmartWorkoutContext>(options =>
 	options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnectionString")));
@@ -32,6 +37,12 @@ builder.Services.AddScoped<IExerciseRepository, ExerciseRepository>();
 builder.Services.AddScoped<IWorkoutRepository,WorkoutRepository>();
 builder.Services.AddScoped<IExerciseLogRepository, ExerciseLogRepository>();
 builder.Services.AddScoped<IAuthorizationService, AuthorizationService>();
+
+builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+builder.Services.AddScoped<ProtectedSessionStorage>();
+builder.Services.AddAuthenticationCore();
+
+
 
 var app = builder.Build();
 

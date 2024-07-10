@@ -1,5 +1,6 @@
 ﻿using Blazorise.DataGrid;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using SmartWorkout.Components.Services.Interfaces;
 using SmartWorkout.DTO;
 using SmartWorkout.Entities;
@@ -16,11 +17,13 @@ public partial class WorkoutsPage : ComponentBase
 	[Inject] public IUserRepository UserRepository { get; set; }
 
 	[Inject] public IAuthorizationService AuthorizationService { get; set; }
-	[Parameter] public int? UserId { get; set; }  
+
+	[Inject] public ProtectedSessionStorage SessionStorage { get; set; }
+	[Parameter] public int? UserId { get; set; }
 
 
 	private ICollection<Workout> Workouts;
-	
+
 	public UserDTO User { get; set; }
 
 	public UserDTO CurrentUser { get; set; }
@@ -62,24 +65,21 @@ public partial class WorkoutsPage : ComponentBase
 		NavigationManager.NavigateTo($"/workouts/add/{UserId}");
 	}
 
-	protected override void OnParametersSet()
+	protected override  async Task OnParametersSetAsync()
 	{
-		
+
 		if (UserId != null)
 		{
 			Workouts = WorkoutRepository.GetAllWorkoutsByUserId(UserId.Value);
 			UserIdIsPresent = true;
-			User = UserRepository.GetUserById(UserId);
-			
+			var user =  await SessionStorage.GetAsync<UserDTO>("UserSession");
+			User = UserRepository.GetUserById(user.Value.Id);
+
 		}
 		else
 		{
 			Workouts = WorkoutRepository.GetWorkouts();
 		}
 
-		CurrentUser = AuthorizationService.GetCurrentUser();
 	}
-
-
-
 }

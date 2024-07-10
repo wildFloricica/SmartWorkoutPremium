@@ -4,7 +4,7 @@
 @rendermode InteractiveServer
 @if (UserId != null)
 {
-	<Heading Size="HeadingSize.Is2" Padding="Padding.Is3" TextAlignment="TextAlignment.Center">@User.FirstName @User.LastName`s workouts</Heading>
+	<Heading Size="HeadingSize.Is2" Padding="Padding.Is3" TextAlignment="TextAlignment.Center">@User?.FirstName @User?.LastName`s workouts</Heading>
 }
 else
 {
@@ -28,7 +28,7 @@ else
 	else
 	{
 
-		<DataGridColumn TItem="Workout" Field="User.FirstName" Caption="User">
+		<DataGridColumn TItem="Workout" Field="User?.FirstName" Caption="User">
 			<DisplayTemplate>
 				@{
 					var user = (context as Workout)?.User;
@@ -46,7 +46,7 @@ else
 
 	<DataGridCommandColumn TItem="Workout" DeleteCommandAllowed="false" NewCommandAllowed="@UserIdIsPresent">
 		<NewCommandTemplate>
-			@if (CurrentUser.isAdmin)
+			@if (User?.IsAdmin ?? false)
 			{
 				<Button Color="Color.Primary" Clicked="() => AddWorkout()">
 					<Icon Name="IconName.Add"></Icon>
@@ -57,7 +57,7 @@ else
 		</NewCommandTemplate>
 		<EditCommandTemplate>
 			<Button Color="Color.Dark" Clicked="() => EditWorkout(context)">View workout</Button>
-			@if (CurrentUser.isAdmin)
+			@if (User?.IsAdmin ?? false)
 			{
 				<Button Color="Color.Danger" Clicked="() => OnDeleteButtonClicked(context)">Delete</Button>
 			}

@@ -65,7 +65,7 @@ public partial class WorkoutsPage : ComponentBase
 		NavigationManager.NavigateTo($"/workouts/add/{UserId}");
 	}
 
-	protected override  async Task OnParametersSetAsync()
+	protected override async Task OnParametersSetAsync()
 	{
 
 		if (UserId != null)

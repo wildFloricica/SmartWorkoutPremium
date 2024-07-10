@@ -37,7 +37,7 @@ namespace SmartWorkout.Components.Layout
 				return;
 			}
 			User = UserRepository.GetUserById(user.Value.Id);
-			NavigationManager.NavigateTo($"/workouts/{User.Id}");
+			NavigationManager.NavigateTo($"/workouts/{User.Id}",true);
 		}
 	}
 }

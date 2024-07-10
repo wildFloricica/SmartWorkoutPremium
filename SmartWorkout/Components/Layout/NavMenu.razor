@@ -1,5 +1,5 @@
 ﻿@rendermode InteractiveServer
-<AuthorizeView>
+
 
 	<div class="top-row ps-3 navbar" style="background-color:#03A678;">
 		<Div class="container-fluid" Style="justify-content:flex-start">
@@ -30,8 +30,8 @@
 				</NavLink>
 			</div>
 
-			<div style="margin-top:1rem" class="nav-item px-3">
-				<NavLink class="nav-link" @onclick="() => GoToWorkouts()">
+		<div style="margin-top:1rem" class="nav-item px-3" @onclick="() => GoToWorkouts()">
+				<NavLink class="nav-link">
 					<Span class="fas fa-table-list" Margin="Margin.Is3.FromEnd" TextColor="TextColor.Primary">
 					</Span>
 					<Text TextColor="TextColor.Primary">WORKOUTS</Text>
@@ -57,6 +57,5 @@
 		</nav>
 
 	</div>
-</AuthorizeView>
 
 

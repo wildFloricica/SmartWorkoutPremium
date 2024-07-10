@@ -1,7 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Authorization
 @using SmartWorkout.Entities
 @page "/users"
-@attribute [Authorize(Roles = "Administrator")]
+@attribute [Authorize(Roles = "Administrator,User")]
 <Heading Size="HeadingSize.Is2" Padding="Padding.Is3" TextAlignment="TextAlignment.Center">Users</Heading>
 
 <DataGrid TItem="User"

@@ -11,7 +11,7 @@ namespace SmartWorkout.Components.Pages
 	public partial  class ExerciseLogsPage : ComponentBase
 	{
 		[Inject]
-		public UserRepository UserRepository { get; set; }
+		public IUserRepository UserRepository { get; set; }
 		[Inject]
 		public IExerciseLogRepository ExerciseLogRepository { get; set; }
 		[Inject]

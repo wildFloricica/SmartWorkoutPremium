@@ -1,7 +1,8 @@
 ﻿@page "/workouts/{UserId:int?}"
-
+@using Microsoft.AspNetCore.Authorization
 @using SmartWorkout.Entities
 @rendermode InteractiveServer
+@attribute [Authorize(Roles = "Administrator,User")]
 @if (UserId != null)
 {
 	<Heading Size="HeadingSize.Is2" Padding="Padding.Is3" TextAlignment="TextAlignment.Center">@User?.FirstName @User?.LastName`s workouts</Heading>

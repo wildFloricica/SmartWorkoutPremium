@@ -3,7 +3,7 @@
 @using SmartWorkout.Entities
 @attribute [Authorize(Roles = "Administrator,User")]
 <Heading Size="HeadingSize.Is2" Padding="Padding.Is3" TextAlignment="TextAlignment.Center">@Workout.Name Workout</Heading>
-<Div Margin="Margin.IsAuto.OnX" style="background:url(background.jpg);background-size:cover;opacity:90%">
+<Div Margin="Margin.IsAuto.OnX" style="background:url(bootstrap/background.jpg);background-size:cover;opacity:90%">
 
 	<AuthorizeView Roles="Administrator" Context="AddExerciseLogContext">
 		<EditForm Model="ExerciseLog" OnValidSubmit="@SaveCurrentExerciseLog">

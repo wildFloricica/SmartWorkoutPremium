@@ -15,7 +15,7 @@ namespace SmartWorkout.Components.Pages
 		
 		public UserDTO User { get; set; }
 
-		protected override async Task OnAfterRenderAsync(bool firstRender)
+		protected override async Task OnInitializedAsync()
 		{
 			var user = await SessionStorage.GetAsync<UserDTO>("UserSession");
 			if (user.Success)
@@ -23,7 +23,6 @@ namespace SmartWorkout.Components.Pages
 				User = UserRepository.GetUserById(user.Value.Id);
 			}
 
-			await base.OnAfterRenderAsync(firstRender);
 		}
 		public void GoToWorkouts()
 		{

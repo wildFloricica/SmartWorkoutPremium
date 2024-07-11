@@ -33,13 +33,15 @@ namespace SmartWorkout.Components.Pages
 			try
 			{
 				AuthorizationService.Login(LoginDTO);
-				NavigationManager.NavigateTo("/home",true);
+				NavigationManager.NavigateTo("/home");
 			}
 			catch (InvalidCredentialsException e)
 			{
 				Console.WriteLine(e);
 				ErrorMessage = e.Message;
 			}
+
+			StateHasChanged();
 			
 		}
 

@@ -1,5 +1,6 @@
 ﻿using Blazorise.DataGrid;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using SmartWorkout.Components.Services.Interfaces;
 using SmartWorkout.DTO;
@@ -80,7 +81,16 @@ public partial class WorkoutsPage : ComponentBase
 		}
 		else
 		{
-			Workouts = WorkoutRepository.GetWorkouts();
+			var user = await SessionStorage.GetAsync<UserDTO>("UserSession");
+			User = UserRepository.GetUserById(user.Value.Id);
+			if (User.IsAdmin)
+			{
+				Workouts = WorkoutRepository.GetWorkouts();
+			}
+			else
+			{
+				NavigationManager.NavigateTo($"/workouts/{User.Id}");
+			}
 		}
 
 	}

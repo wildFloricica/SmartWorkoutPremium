@@ -71,4 +71,24 @@ public class ExerciseLogRepository : IExerciseLogRepository
 
 		throw new Exception("Exercise Log not found!");
 	}
+
+	public void UpdateExerciseLog(int? id, ExerciseLogDTO exerciseLog)
+	{
+		ExerciseLog exerciseLogToUpdate = _context.ExerciseLogs.FirstOrDefault(x => x.Id == id);
+
+		if (exerciseLogToUpdate != null)
+		{
+			exerciseLogToUpdate.ExerciseId = exerciseLog.ExerciseId;
+			exerciseLogToUpdate.Duration = exerciseLog.Duration;
+			exerciseLogToUpdate.Reps = exerciseLog.Reps;
+			exerciseLogToUpdate.WorkoutId = exerciseLog.WorkoutId;
+			_context.ExerciseLogs.Update(exerciseLogToUpdate);
+			_context.SaveChanges();
+
+		}
+		else
+		{
+			throw new Exception($"ExLog with id {id} not found!");
+		}
+	}
 }

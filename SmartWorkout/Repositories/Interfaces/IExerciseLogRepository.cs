@@ -15,4 +15,5 @@ public interface IExerciseLogRepository
 
 	ExerciseLogDTO GetExerciseLogById(int exerciseLogId);
 
+	void UpdateExerciseLog(int? id, ExerciseLogDTO exerciseLog);
 }	

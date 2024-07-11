@@ -1,4 +1,5 @@
-﻿@using Microsoft.AspNetCore.Authorization
+﻿﻿@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Authorization
 @using SmartWorkout.Entities
 @page "/exercise-logs"
 @rendermode InteractiveServer
@@ -13,16 +14,16 @@
 	<DataGridColumn TItem="ExerciseLog" Field="Exercise.Description" Caption="Exercise"></DataGridColumn>
 	<DataGridColumn TItem="ExerciseLog" Field="Workout.Name" Caption="Workout"></DataGridColumn>
 	<DataGridColumn TItem="ExerciseLog" Field="Workout.User.FirstName" Caption="User">
-	<DisplayTemplate>
-		@{
-			var user = (context as ExerciseLog)?.Workout.User;
+		<DisplayTemplate>
+			@{
+				var user = (context as ExerciseLog)?.Workout.User;
 
-			if (user != null)
-			{
-				@($"{user.FirstName} {user.LastName}")
+				if (user != null)
+				{
+					@($"{user.FirstName} {user.LastName}")
+				}
 			}
-		}
-	</DisplayTemplate>
+		</DisplayTemplate>
 	</DataGridColumn>
 	<DataGridColumn TItem="ExerciseLog" Field="Reps" Caption="Reps"></DataGridColumn>
 	<DataGridColumn TItem="ExerciseLog" Field="Duration" Caption="Duration"></DataGridColumn>

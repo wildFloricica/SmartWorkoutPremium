@@ -1,0 +1,64 @@
+﻿@using Microsoft.AspNetCore.Authorization
+@using SmartWorkout.Entities
+@page "/exercise-logs/edit/{ExerciseLogId:int}"
+@rendermode InteractiveServer
+@attribute [Authorize(Roles = "Administrator,User")]
+<Div Margin="Margin.IsAuto.OnX" style="background:url(bootstrap/background.jpg);background-size:cover;opacity:90%;height:90vh">
+
+	<EditForm Model="ExerciseLog" OnValidSubmit="@SaveCurrentExerciseLog">
+		<DataAnnotationsValidator />
+		<Div Padding="Padding.Is3" Margin="Margin.IsAuto.OnX" Style="width:33%">
+
+			<Card Margin="Margin.Is5.FromTop" Shadow="Shadow.Default">
+				<CardBody>
+					<Heading Size="HeadingSize.Is2" Margin="Margin.Is3.FromBottom.Is3.FromTop" TextAlignment="TextAlignment.Center">
+						Edit exercise log	
+					</Heading>
+
+					<Field>
+						<FieldLabel>
+							Reps
+						</FieldLabel>
+						<FieldBody>
+							<NumericEdit Placeholder="Number of exercise reps" @bind-Value="ExerciseLog.Reps" />
+							<ValidationMessage For="@(() => ExerciseLog.Reps)" />
+						</FieldBody>
+					</Field>
+
+					<Field>
+						<FieldLabel>
+							Duration
+						</FieldLabel>
+						<FieldBody>
+							<NumericEdit Placeholder="Duration of exercise(seconds)" @bind-Value="ExerciseLog.Duration" />
+							<ValidationMessage For="@(() => ExerciseLog.Duration)" />
+						</FieldBody>
+					</Field>
+
+					<Field>
+						<FieldLabel>
+							Exercise
+							<FieldBody>
+								<Select Width="Width.Is100" @bind-SelectedValue="@ExerciseLog.ExerciseId">
+									@foreach (Exercise exercise in Exercises)
+									{
+										<SelectItem Value="@exercise.Id">@exercise.Description</SelectItem>
+									}
+								</Select>
+							</FieldBody>
+						</FieldLabel>
+					</Field>
+
+
+					<Field>
+						<Button Type="ButtonType.Submit" Color="Color.Primary" Block>
+							Update
+						</Button>
+					</Field>
+
+
+				</CardBody>
+			</Card>
+		</Div>
+	</EditForm>
+</Div>

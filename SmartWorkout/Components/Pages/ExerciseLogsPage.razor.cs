@@ -8,7 +8,7 @@ using SmartWorkout.Repositories.Interfaces;
 
 namespace SmartWorkout.Components.Pages
 {
-	public partial  class ExerciseLogsPage : ComponentBase
+	public partial class ExerciseLogsPage : ComponentBase
 	{
 		[Inject]
 		public IUserRepository UserRepository { get; set; }
@@ -26,7 +26,7 @@ namespace SmartWorkout.Components.Pages
 		{
 			var user = await SessionStorage.GetAsync<UserDTO>("UserSession");
 			User = UserRepository.GetUserById(user.Value.Id);
-		
+
 
 			if (User.IsAdmin)
 			{
@@ -36,7 +36,7 @@ namespace SmartWorkout.Components.Pages
 			{
 				ExerciseLogs = ExerciseLogRepository.GetExerciseLogs().Where(x => x.Workout.UserId == User.Id).ToList();
 			}
-			
+
 		}
 	}
 }

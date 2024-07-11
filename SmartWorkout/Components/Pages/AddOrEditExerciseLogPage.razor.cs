@@ -91,7 +91,7 @@ public partial class AddOrEditExerciseLogPage:ComponentBase
 	{
 		if (context != null && context.Item != null)
 		{
-			NavigationManager.NavigateTo($"/exercise-log/edit/{context.Item.Id}");
+			NavigationManager.NavigateTo($"/exercise-logs/edit/{context.Item.Id}");
 		}
 	}
 

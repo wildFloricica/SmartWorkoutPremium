@@ -13,7 +13,7 @@ a, .btn-link {
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 .content {
@@ -55,16 +55,22 @@ h1:focus {
     color: white !important;
 }
 
-.nav-link:focus span{
-    color:white !important;
-}
-.nav-link:hover {
-    background-color: #f7ac69 !important;
-    cursor:pointer !important;
+.nav-link:active {
+    background-color: #F27405 !important;
+    color: white !important;
 }
 
-.nav-item:hover{
-    cursor:pointer !important;
+.nav-link:focus span {
+    color: white !important;
+}
+
+.nav-link:hover {
+    background-color: #f7ac69 !important;
+    cursor: pointer !important;
+}
+
+.nav-item:hover {
+    cursor: pointer !important;
 }
 
 .card-header:hover {
@@ -76,3 +82,32 @@ h1:focus {
     color: white !important;
 }
 
+<div class="top-row ps-3 navbar" style="background-color:#03A678;" b-e2p9016mp5="" ><!-- ! --> <a style="justify-content:flex-start" class="container-fluid active" href="home" aria-current="page" ><!-- ! --> <span class="fas fa-stopwatch-20 mr-3 text-white fs-lg" _bl_7ed0389c-02b0-4213-aa82-2080471ad799="" > </span ><!-- ! -->
+<!-- ! --> <span class="text-light fs-lg" href="" _bl_9c9c46b2-0deb-4432-9495-c49f53fd235e="" > SmartWorkout</span > </a > </div >
+
+.top-row:hover {
+    color: red !important;
+}
+
+.card-flex {
+    background-color: rgba(245, 245, 255) !important;
+    margin-left: 20rem;
+    margin-right: 20rem;
+   
+}
+
+.text-link:hover {
+    cursor: pointer;
+}
+
+.text-link:hover span {
+        color: #f7ac69 !important;
+}
+
+.nav-item[b-e2p9016mp5] a.active {
+    background-color: #F27405 !important;
+    color: white !important;
+}
+.nav-item[b-e2p9016mp5] a.active span{
+    color: white !important;
+}

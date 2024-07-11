@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using System.Security.Claims;
+using Blazorise;
+using Microsoft.AspNetCore.Components;
 using SmartWorkout.DTO;
 using SmartWorkout.Entities;
 
@@ -8,6 +10,7 @@ namespace SmartWorkout.Authentication;
 
 public class CustomAuthenticationStateProvider:AuthenticationStateProvider
 {
+	
 	// ProtectedSessionStorage for storing user session data securely in the browser.
 	private readonly ProtectedSessionStorage _sessionStorage;
 
@@ -24,7 +27,8 @@ public class CustomAuthenticationStateProvider:AuthenticationStateProvider
 	{
 		try
 		{
-			await Task.Delay(1000);
+			await Task.Delay(2000);
+			
 			var userSessionStorageResult = await _sessionStorage.GetAsync<UserDTO>("UserSession");
 			var userSession = userSessionStorageResult.Success ? userSessionStorageResult.Value : null;
 			if (userSession == null)
@@ -64,4 +68,5 @@ public class CustomAuthenticationStateProvider:AuthenticationStateProvider
 		}
 		NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(claimsPrincipal)));
 	}
+
 }	

@@ -1,6 +1,8 @@
-﻿@using SmartWorkout.Entities
+﻿@using Microsoft.AspNetCore.Authorization
+@using SmartWorkout.Entities
 @page "/exercise-logs"
 @rendermode InteractiveServer
+@attribute [Authorize(Roles = "Administrator,User")]
 <Heading Size="HeadingSize.Is2" Padding="Padding.Is3" TextAlignment="TextAlignment.Center">Exercise Logs</Heading>
 <DataGrid TItem="ExerciseLog"
           Data = "@ExerciseLogs"

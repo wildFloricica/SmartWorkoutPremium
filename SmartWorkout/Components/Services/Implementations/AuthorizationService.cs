@@ -6,6 +6,7 @@ using SmartWorkout.Components.Services.Interfaces;
 using SmartWorkout.DTO;
 using SmartWorkout.Entities;
 using SmartWorkout.Repositories.Interfaces;
+using System.Security.Claims;
 
 namespace SmartWorkout.Components.Services.Implementations
 {
@@ -43,5 +44,11 @@ namespace SmartWorkout.Components.Services.Implementations
 			}
 	        
         }
+
+        public void Logout()
+        {
+	        _customAuthenticationStateProvider.UpdateAuthenticationState(null);
+        }
+
     }
 }

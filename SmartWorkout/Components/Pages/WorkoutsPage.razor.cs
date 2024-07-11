@@ -48,7 +48,7 @@ public partial class WorkoutsPage : ComponentBase
 		if (SelectedWorkout != null)
 		{
 			WorkoutRepository.DeleteWorkout(SelectedWorkout.Id);
-			OnParametersSet();
+			OnParametersSetAsync();
 		}
 	}
 

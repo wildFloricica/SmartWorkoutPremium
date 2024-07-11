@@ -44,8 +44,7 @@ builder.Services.AddScoped<IAuthorizationService, AuthorizationService>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 builder.Services.AddScoped<ProtectedSessionStorage>();
 builder.Services.AddAuthenticationCore();
-
-
+builder.Services.AddRazorComponents().AddInteractiveServerComponents().AddHubOptions(options => { options.MaximumReceiveMessageSize = 500 * 1024; });
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

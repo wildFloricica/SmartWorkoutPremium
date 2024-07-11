@@ -38,7 +38,7 @@ namespace SmartWorkout.Components.Pages
 			NavigationManager.NavigateTo("/users");
 		}
 
-		private void HandleFieldChanged(object? sender, FieldChangedEventArgs args)
+		private void HandleFieldChanged(object? sender, ValidationRequestedEventArgs args)
 		{
 			MessageStore?.Clear();
 
@@ -61,7 +61,7 @@ namespace SmartWorkout.Components.Pages
 			EditContext = new EditContext(User);
 			MessageStore = new ValidationMessageStore(EditContext);
 
-			EditContext.OnFieldChanged += HandleFieldChanged;
+			EditContext.OnValidationRequested += HandleFieldChanged;
 		}
 
 

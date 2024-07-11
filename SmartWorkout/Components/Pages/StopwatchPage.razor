@@ -1,7 +1,8 @@
 ﻿@page "/stopwatch/{ExerciseLogId:int}"
-
+@attribute [Authorize(Roles = "Administrator,User")]
 @using System.Timers
 @using Blazorise.Extensions
+@using Microsoft.AspNetCore.Authorization
 <Div Margin="Margin.IsAuto.OnX" style="background:url(background.jpg);background-size:cover;opacity:90%;height:90vh">
 
 

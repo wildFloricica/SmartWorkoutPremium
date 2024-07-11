@@ -29,7 +29,7 @@ else
 	else
 	{
 
-		<DataGridColumn TItem="Workout" Field="User?.FirstName" Caption="User">
+		<DataGridColumn TItem="Workout" Field="User" Caption="User">
 			<DisplayTemplate>
 				@{
 					var user = (context as Workout)?.User;
@@ -47,22 +47,23 @@ else
 
 	<DataGridCommandColumn TItem="Workout" DeleteCommandAllowed="false" NewCommandAllowed="@UserIdIsPresent">
 		<NewCommandTemplate>
-			@if (User?.IsAdmin ?? false)
-			{
+			<AuthorizeView Roles="Administrator" Context="addContext">
 				<Button Color="Color.Primary" Clicked="() => AddWorkout()">
 					<Icon Name="IconName.Add"></Icon>
 					Add new Workout
 				</Button>
-			}
+			</AuthorizeView>
 
 		</NewCommandTemplate>
 		<EditCommandTemplate>
 			<Button Color="Color.Dark" Clicked="() => EditWorkout(context)">View workout</Button>
-			@if (User?.IsAdmin ?? false)
-			{
+
+			<AuthorizeView Roles="Administrator" Context="deleteContext">
 				<Button Color="Color.Danger" Clicked="() => OnDeleteButtonClicked(context)">Delete</Button>
-			}
-			
+			</AuthorizeView>
+
+
+
 		</EditCommandTemplate>
 	</DataGridCommandColumn>
 

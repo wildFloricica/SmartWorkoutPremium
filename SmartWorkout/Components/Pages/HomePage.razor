@@ -1,0 +1,36 @@
+﻿@page "/home"
+@page "/"
+@using Microsoft.AspNetCore.Authorization
+@rendermode InteractiveServer
+@attribute [Authorize(Roles = "Administrator,User")]
+<Div Margin="Margin.IsAuto.OnX" style="background:url(background.jpg);background-size:cover;opacity:100%;height:90vh">
+
+	<Div Margin="Padding.Is5.FromBottom">
+		<Heading TextWeight="TextWeight.Bold" Size="HeadingSize.Is1" Padding="Padding.Is3.Is5.FromTop" TextAlignment="TextAlignment.Center"><span>Welcome to SmartWorkout</span></Heading>
+		<Heading Size="HeadingSize.Is5" TextAlignment="TextAlignment.Center"> Your fitness companion for a healthier life!</Heading>
+	</Div>
+
+
+
+	<Div Flex="Flex.Row.AlignItems.Center.JustifyContent.Center" Margin="Margin.Is5.FromTop">
+		<Card Class="card-flex" Margin="Margin.Is5.Is5.FromStart" Padding="Padding.Is5.FromBottom.Is5" Shadow="Shadow.Default">
+
+			
+			<Heading Size="HeadingSize.Is6" TextAlignment="TextAlignment.Justified"><span style="color:#03A678 !important" class="fas fa-play"></span><span> ARE YOU READY TO</span></Heading>
+			<Heading Size="HeadingSize.Is3" TextWeight="TextWeight.Bold" TextAlignment="TextAlignment.Justified"><span style="color:#03A678 !important"> GET STRONG</span><span>, FIT</span></Heading>
+			<Heading Size="HeadingSize.Is3" TextWeight="TextWeight.Bold" TextAlignment="TextAlignment.Justified"><span>& MOTIVATED?</span></Heading>
+			<Heading class="text-link" Size="HeadingSize.Is3" TextWeight="TextWeight.Bold" TextAlignment="TextAlignment.Justified"> <Span @onclick="() => GoToWorkouts()" style="color:#F27405" href="workouts">BEGIN NOW</Span></Heading>
+
+		</Card>
+
+		<Card Class="card-flex" Margin="Margin.Is5.Is5.FromStart" Padding="Padding.Is5.FromBottom.Is5" Shadow="Shadow.Default">
+
+
+			<Heading Size="HeadingSize.Is6" TextAlignment="TextAlignment.Justified"><span style="color:#03A678 !important" class="fas fa-check"></span><span> THE FASTEST WAY TO GET IN SHAPE </span></Heading>
+			<Heading Size="HeadingSize.Is3" TextWeight="TextWeight.Bold" TextAlignment="TextAlignment.Justified"> <span>OUR TRAINERS WILL GUIDE YOU</span></Heading>
+			<Heading Size="HeadingSize.Is3" TextWeight="TextWeight.Bold" TextAlignment="TextAlignment.Justified"><span style="color:#03A678 !important" P>EVERY STEP</span><span> OF THE WAY </span></Heading>
+			<Heading Size="HeadingSize.Is3" TextWeight="TextWeight.Bold" TextAlignment="TextAlignment.Justified"> <span>ON YOUR FITNESS JOURNEY</span></Heading>
+
+		</Card>
+	</Div>
+</Div>

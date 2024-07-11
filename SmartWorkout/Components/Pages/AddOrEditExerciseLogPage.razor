@@ -1,65 +1,68 @@
 ﻿@page "/exercise-logs/add/{WorkoutId:int}"
+@using Microsoft.AspNetCore.Authorization
 @using SmartWorkout.Entities
-
+@attribute [Authorize(Roles = "Administrator,User")]
 <Heading Size="HeadingSize.Is2" Padding="Padding.Is3" TextAlignment="TextAlignment.Center">@Workout.Name Workout</Heading>
 <Div Margin="Margin.IsAuto.OnX" style="background:url(background.jpg);background-size:cover;opacity:90%">
 
-	<EditForm Model="ExerciseLog" OnValidSubmit="@SaveCurrentExerciseLog">
-		<DataAnnotationsValidator />
-		<Div Padding="Padding.Is3" Margin="Margin.IsAuto.OnX" Style="width:33%">
+	<AuthorizeView Roles="Administrator" Context="AddExerciseLogContext">
+		<EditForm Model="ExerciseLog" OnValidSubmit="@SaveCurrentExerciseLog">
+			<DataAnnotationsValidator />
+			<Div Padding="Padding.Is3" Margin="Margin.IsAuto.OnX" Style="width:33%">
 
-			<Card Margin="Margin.Is5.FromTop" Shadow="Shadow.Default">
-				<CardBody>
-					<Heading Size="HeadingSize.Is2" Margin="Margin.Is3.FromBottom.Is3.FromTop" TextAlignment="TextAlignment.Center">
-						Add exercise log to workout
-					</Heading>
+				<Card Margin="Margin.Is5.FromTop" Shadow="Shadow.Default">
+					<CardBody>
+						<Heading Size="HeadingSize.Is2" Margin="Margin.Is3.FromBottom.Is3.FromTop" TextAlignment="TextAlignment.Center">
+							Add exercise log to workout
+						</Heading>
 
-					<Field>
-						<FieldLabel>
-							Reps
-						</FieldLabel>
-						<FieldBody>
-							<NumericEdit Placeholder="Number of exercise reps" @bind-Value="ExerciseLog.Reps" />
-							<ValidationMessage For="@(() => ExerciseLog.Reps)" />
-						</FieldBody>
-					</Field>
-
-					<Field>
-						<FieldLabel>
-							Duration
-						</FieldLabel>
-						<FieldBody>
-							<NumericEdit Placeholder="Duration of exercise(seconds)" @bind-Value="ExerciseLog.Duration" />
-							<ValidationMessage For="@(() => ExerciseLog.Duration)" />
-						</FieldBody>
-					</Field>
-
-					<Field>
-						<FieldLabel>
-							Exercise
+						<Field>
+							<FieldLabel>
+								Reps
+							</FieldLabel>
 							<FieldBody>
-								<Select Width="Width.Is100" @bind-SelectedValue="@ExerciseLog.ExerciseId">
-									@foreach (Exercise exercise in Exercises)
-									{
-										<SelectItem Value="@exercise.Id">@exercise.Description</SelectItem>
-									}
-								</Select>
+								<NumericEdit Placeholder="Number of exercise reps" @bind-Value="ExerciseLog.Reps" />
+								<ValidationMessage For="@(() => ExerciseLog.Reps)" />
 							</FieldBody>
-						</FieldLabel>
-					</Field>
+						</Field>
+
+						<Field>
+							<FieldLabel>
+								Duration
+							</FieldLabel>
+							<FieldBody>
+								<NumericEdit Placeholder="Duration of exercise(seconds)" @bind-Value="ExerciseLog.Duration" />
+								<ValidationMessage For="@(() => ExerciseLog.Duration)" />
+							</FieldBody>
+						</Field>
+
+						<Field>
+							<FieldLabel>
+								Exercise
+								<FieldBody>
+									<Select Width="Width.Is100" @bind-SelectedValue="@ExerciseLog.ExerciseId">
+										@foreach (Exercise exercise in Exercises)
+										{
+											<SelectItem Value="@exercise.Id">@exercise.Description</SelectItem>
+										}
+									</Select>
+								</FieldBody>
+							</FieldLabel>
+						</Field>
 
 
-					<Field>
-						<Button Type="ButtonType.Submit" Color="Color.Primary" Block>
-							Create
-						</Button>
-					</Field>
+						<Field>
+							<Button Type="ButtonType.Submit" Color="Color.Primary" Block>
+								Create
+							</Button>
+						</Field>
 
 
-				</CardBody>
-			</Card>
-		</Div>
-	</EditForm>
+					</CardBody>
+				</Card>
+			</Div>
+		</EditForm>
+	</AuthorizeView>
 </Div>
 
 <Accordion>
@@ -95,12 +98,11 @@
 
 				<DataGridCommandColumn TItem="ExerciseLog" DeleteCommandAllowed="false" NewCommandAllowed="false">
 					<EditCommandTemplate>
-						
-						@*@if (AuthorizationService.GetCurrentUser().IsAdmin)
-						{
+
+						<AuthorizeView Roles="Administrator" Context="ExerciseLogContext">
 							<Button Color="Color.Dark" Clicked="() => EditExerciseLog(context)">Edit</Button>
 							<Button Color="Color.Danger" Clicked="() => OnDeleteButtonClicked(context)">Delete</Button>
-						}*@
+						</AuthorizeView>
 						<Button Color="Color.Secondary" Clicked="() => StartWorkout(context)">Start</Button>
 					</EditCommandTemplate>
 				</DataGridCommandColumn>

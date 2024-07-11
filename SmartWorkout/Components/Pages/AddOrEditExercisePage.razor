@@ -1,8 +1,9 @@
 ﻿@page "/exercises/add"
 @page "/exercises/edit/{ExerciseId:int}"
+@using Microsoft.AspNetCore.Authorization
 @using SmartWorkout.Entities
 @rendermode InteractiveServer
-
+@attribute [Authorize(Roles = "Administrator")]
 <Div Margin="Margin.IsAuto.OnX" style="background:url(background.jpg);background-size:cover;opacity:90%;height:90vh">
 
 	<EditForm Model="Exercise" OnValidSubmit="@SaveCurrentExercise">

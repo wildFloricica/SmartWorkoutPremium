@@ -6,6 +6,6 @@ namespace SmartWorkout.Components.Services.Interfaces
 	{
 		void Login(LoginDTO loginDto);
 
-		
+		void Logout();
 	}
 }

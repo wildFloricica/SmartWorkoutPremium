@@ -1,12 +1,12 @@
 ﻿@rendermode InteractiveServer
 
 
-	<div class="top-row ps-3 navbar" style="background-color:#03A678;">
-		<Div class="container-fluid" Style="justify-content:flex-start">
+<div class="top-row ps-3 navbar" style="background-color:#03A678;">
+		<NavLink class="container-fluid nav-link" Style="justify-content:flex-start" href="home">
 			<Span TextSize="TextSize.Large" class="fas fa-stopwatch-20" Margin="Margin.Is3.FromEnd" TextColor="TextColor.White">
 			</Span>
-			<Text TextSize="TextSize.Large" TextColor="TextColor.Light" href="">SmartWorkout</Text>
-		</Div>
+			<Text TextWeight="TextWeight.Bold" TextSize="TextSize.Large" TextColor="TextColor.Light" href="">SmartWorkout</Text>
+		</NavLink>
 	</div>
 
 	<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
@@ -19,7 +19,7 @@
 					<NavLink class="nav-link" href="users">
 						<Span class="fas fa-users" Margin="Margin.Is3.FromEnd" TextColor="TextColor.Primary">
 						</Span>
-						<Text TextColor="TextColor.Primary">USERS</Text>
+						<Text TextWeight="TextWeight.Bold" TextColor="TextColor.Primary">USERS</Text>
 					</NavLink>
 				</div>
 			</AuthorizeView>
@@ -29,19 +29,17 @@
 					<NavLink class="nav-link" href="exercises">
 						<Span class="fas fa-dumbbell" Margin="Margin.Is3.FromEnd" TextColor="TextColor.Primary">
 						</Span>
-						<Text TextColor="TextColor.Primary">EXERCISES</Text>
+					<Text TextWeight="TextWeight.Bold" TextColor="TextColor.Primary">EXERCISES</Text>
 					</NavLink>
 				</div>
 			</AuthorizeView>
-			
-			
+
 			<AuthorizeView Roles="User">
-				
-			<div style="margin-top:1rem" class="nav-item px-3" href="workouts">
+			<div class="nav-item px-3" @onclick="(() => GoToWorkouts())">
 					<NavLink class="nav-link">
 						<Span class="fas fa-table-list" Margin="Margin.Is3.FromEnd" TextColor="TextColor.Primary">
 						</Span>
-						<Text TextColor="TextColor.Primary">WORKOUTS</Text>
+					<Text TextWeight="TextWeight.Bold" TextColor="TextColor.Primary">WORKOUTS</Text>
 					</NavLink>
 				</div>
 			</AuthorizeView>
@@ -52,7 +50,7 @@
 					<NavLink class="nav-link" href="workouts">
 						<Span class="fas fa-table-list" Margin="Margin.Is3.FromEnd" TextColor="TextColor.Primary">
 						</Span>
-						<Text TextColor="TextColor.Primary">WORKOUTS</Text>
+					<Text TextWeight="TextWeight.Bold" TextColor="TextColor.Primary">WORKOUTS</Text>
 					</NavLink>
 				</div>
 
@@ -63,7 +61,7 @@
 					<NavLink class="nav-link" href="exercise-logs" >
 						<Span class="fas fa-clock-rotate-left" Margin="Margin.Is3.FromEnd" TextColor="TextColor.Primary">
 						</Span>
-						<Text TextColor="TextColor.Primary">EXERCISE LOGS</Text>
+					<Text TextWeight="TextWeight.Bold" TextColor="TextColor.Primary">EXERCISE LOGS</Text>
 					</NavLink>
 				</div>
 
